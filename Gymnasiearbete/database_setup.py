@@ -11,8 +11,9 @@ cur.execute('''CREATE TABLE IF NOT EXISTS products (
 )''')
 
 new_products = [
-    ('Tangentbord','Ett tangentbord som har flera olika fina knappar. Det finns i flera olika färger'),
-    ('Mus','En mus, som har två knappar')
+    ('SteelSeries Apex Pro','Spela mer exakt, snabbt och säkert med världens första mekaniska tangentbord med OmniPoint mekaniska brytare. Varje enskild tangent kan tweakas för att möta önskad aktivering, från världens snabbaste fjäderlätta tryckningar till de hårda och djupa. Tangentbordet är även utrustat med en Smart Oled-Display, en integrerad kommandocentral för att justera inställningar, få info direkt från ditt spel, musik eller Discord så att du skall slippa avbryta ditt spel.'),
+    ('Ducky One 2 Mini','Ducky One 2 Mini blev precis lite bättre. 2020 års modell har ett förbättrat kretskort och extra belysning under mellanslagstangenten. Dessutom har firmware skrivits om för en mer stabil skrivupplevelse."\n"Ducky One 2 Mini är utrustat med MX Cherry brytare och högkvalitativa tangenter i PBT-plast vilket tar kvalitén till en ny nivå. De 5 robusta gummidynorna och 2 gummifötterna ser till att tangentbordet stannar på plats under dina spelsessioner.'),
+    ('Logitech G Pro Gaming Keyboard','Detta tangentbord är designat efter de exakta specifikationerna som efterfrågas av världens bästa e-sportare. Det är utrustat med brytarna GX-Blue som erbjuder en klickig upplevelse vilket är efterfrågat av många e-sportsproffs. Utöver formatet i TKL erbjuder även detta tangentbord Logitechs anpassningsbara LIGHTSYNC och en avtagbar mikro-USB-kabel.')
     ]
 
 cur.executemany('INSERT INTO products (name,description) VALUES (?,?)',new_products)
@@ -39,21 +40,38 @@ cur.execute('''CREATE TABLE IF NOT EXISTS produts_categories (
 
 new_products_categories = [(1,1),(1,2)]
 
-cur.executemany('INSERT INTO produts_categories (product_id,category_id) VALUES (?,?)',)
-
+cur.executemany('INSERT INTO produts_categories (product_id,category_id) VALUES (?,?)', new_products_categories)
 
 cur.execute('''CREATE TABLE IF NOT EXISTS pictures (
     id INTEGER PRIMARY KEY,
     filepath TEXT NOT NULL
 )''')
 
+pictures_location = 'Gymnasiearbete\my_server\static\images'
+
 new_pictures = [
-    ('apa.png',),
-    ('apa2.png',),
-    ('apa3.png',)
+    ('my_server\static\imagesp1i1.jpg',),
+    ('my_server\static\imagesp1i2.jpg',),
+    ('my_server\static\imagesp1i3.jpg',),
+    ('my_server\static\imagesp2i1.jpg',),
+    ('my_server\static\imagesp2i2.jpg',),
+    ('my_server\static\imagesp2i3.jpg',),
+    ('my_server\static\imagesp3i1.jpg',),
+    ('my_server\static\imagesp3i2.jpg',),
+    ('my_server\static\imagesp3i3.jpg',)
     ]
 
 cur.executemany('INSERT INTO pictures (filepath) VALUES (?)', new_pictures)
+
+cur.execute('''CREATE TABLE IF NOT EXISTS products_pictures (
+    id INTEGER PRIMARY KEY,
+    product_id INTEGER REFERENCES product(id),
+    picture_id INTEGER REFERENCES picture(id)
+)''')
+
+new_products_pictures = [(1,1),(1,2),(1,3),(2,4),(2,5),(2,6),(3,7),(3,8),(3,9)]
+
+cur.executemany('INSERT INTO products_pictures (product_id,picture_id) VALUES (?,?)', new_products_pictures)
 
 cur.execute('''CREATE TABLE IF NOT EXISTS users (
     id INTEGER PRIMARY KEY,
