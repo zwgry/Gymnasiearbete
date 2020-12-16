@@ -39,7 +39,7 @@ cur.execute('''CREATE TABLE IF NOT EXISTS produts_categories (
 
 new_products_categories = [(1,1),(1,2)]
 
-cur.executemany('INSERT INTO produts_categories (')
+cur.executemany('INSERT INTO produts_categories (product_id,category_id) VALUES (?,?)',)
 
 
 cur.execute('''CREATE TABLE IF NOT EXISTS pictures (
