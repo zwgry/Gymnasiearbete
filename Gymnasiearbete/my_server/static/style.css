@@ -1,3 +1,7 @@
-* {
-    background-color: darkgray;
+.search {
+    color: grey;
+}
+
+.min-h-col {
+    min-height: 59.9vh;
 }
