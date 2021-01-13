@@ -3,6 +3,8 @@ from flask import render_template as rt
 from flask import request, redirect, url_for,flash, abort, session
 from my_server.databeasehandler import create_connection
 
+#db_test.db ligger i gitignore !!!!!!
+
 @app.route('/')
 @app.route('/index')
 @app.route('/home')
