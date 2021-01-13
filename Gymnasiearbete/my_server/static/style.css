@@ -1,5 +1,9 @@
-.search {
+.search{
     color: grey;
+}
+
+.search:hover{
+    color: lightgray;
 }
 
 .min-h-col {
