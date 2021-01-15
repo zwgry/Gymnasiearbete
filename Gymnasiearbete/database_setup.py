@@ -35,9 +35,9 @@ cur.execute('''CREATE TABLE IF NOT EXISTS categories (
 )''')
 
 new_categories = [
-    ('Datortillbehör','Här finns alla datortilbehör','NULL'),
+    ('Datortillbehör','Här finns alla datortilbehör',0),
     ('Tangentbord','Här visas alla olika tangetbord som finns',1),
-    ('Datorer','Här finns alla datorer, stationära och bärbara','NULL'),
+    ('Datorer','Här finns alla datorer, stationära och bärbara',0),
     ('Stationära datorer','Här finns alla sationära datorer',3),
     ('Gaming','Alla gamingdatorer',4),
     ('Standard','Alla standarddatorer',4),

@@ -1,7 +1,7 @@
 from my_server import app
 from flask import render_template as rt
 from flask import request, redirect, url_for,flash, abort, session
-from my_server.databeasehandler import create_connection
+from my_server.databasehandler import create_connection
 
 #db_test.db ligger i gitignore !!!!!!
 
@@ -15,7 +15,13 @@ def start():
 
 @app.route('/categories')
 def categories():
-    pass
+    sql = 'SELECT name, main_category FROM categories WHERE main_category = 1'
+    con = create_connection()
+    cur = con.cursor()
+    cur.execute(sql)
+    result = cur.fetchall()
+
+    return f'<h1>{result}</h1>'
 
 @app.route('/category/<id>')
 def category(id=None):
