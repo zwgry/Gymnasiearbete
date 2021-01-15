@@ -15,53 +15,31 @@
 </head>
 <body class="d-flex flex-column min-vh-100 bg-secondary">
 
-<div class="jumbotron jumbotron-fluid text-center bg-dark" style="margin-bottom:0">
-    <h1 class="text-white">{% block headline %}{% endblock%}</h1>
-</div>
-
-<nav class="navbar navbar-dark navbar-expand-md bg-dark justify-content-md-center justify-content-start">
-    <a class="navbar-brand d-md-none d-inline" href="">Brand</a>
-    <button class="navbar-toggler ml-1" type="button" data-toggle="collapse" data-target="#collapsingNavbar2">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-    <a class="nav-link" href="#_"><i class="fa fa-search mr-1 search search-hover"></i></a> 
-    <div class="navbar-collapse collapse justify-content-between align-items-center w-100" id="collapsingNavbar2">
-        <ul class="navbar-nav mx-auto text-md-center text-left">
-            <li class="nav-item">
-                <a class="nav-link" href="#">Link</a> 
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">Link</a>
-            </li>
-            <li class="nav-item my-auto">
-                <a class="nav-link navbar-brand mx-0 d-none d-md-inline" href="">Brand</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">Link</a> 
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">Link</a> 
-            </li>
-        </ul>
-        <ul class="nav navbar-nav flex-row justify-content-md-center justify-content-start flex-nowrap">
-            <li class="nav-item"><a class="nav-link" href=""><i class="fa fa-user mr-1"></i></a> </li>
-            <li class="nav-item"><a class="nav-link" href=""><i class="fa fa-shopping-cart"></i></a> </li>
-        </ul>
+<nav class="navbar navbar-expand-sm color-darknight justify-content-center shadow" style="padding: 0; position: -webkit-sticky; position: sticky;">
+    <div class="navbar-nav color-darknight shadow" style="width: 100%; height: 100%; padding: .5rem 1rem;">
+        <input class="form-control" type="search" style="width: auto;" onkeyup="search(this.value)" placeholder="Search">
+        <a class="nav-link nav-color" href="#_"><i class="fa fa-search mr-1"></i></a>
+        <a class="navbar-brand d-inline nav-color" href="">Brand</a>
+        <a class="nav-link justify-content-end nav-color" href=""><i class="fa fa-user mr-1"></i></a> </li>
+        <a class="nav-link justify-content-end nav-color" href=""><i class="fa fa-shopping-cart"></i></a> </li>
     </div>
 </nav>
 
 <div class="row min-h-col" style="margin-right: 0px;">
-    <div class="col-sm-2 bg-primary" style="text-align: right;">Vänster</div>
-    <div class="col-sm-8 bg-warning" style="text-align: center;">
+    <div class="col-sm-2 color-darknight" style="text-align: right;">Vänster</div>
+    <div class="col-sm-8 color-nightgray" style="text-align: center;">
         <div class="p-3">
+            <img src="../static/images/patrik shooting star.gif" alt="PATRIK STAR SHOTTER" width="1000px" height="300px">
+            <img src="../static/images/patrik shooting star.gif" alt="PATRIK STAR SHOTTER" width="1000px" height="300px">
+            <img src="../static/images/patrik shooting star.gif" alt="PATRIK STAR SHOTTER" width="1000px" height="300px">
             <img src="../static/images/patrik shooting star.gif" alt="PATRIK STAR SHOTTER" width="1000px" height="300px">
         </div>
     </div>
-    <div class="col-sm-2 bg-primary">Höger</div>
+    <div class="col-sm-2 color-darknight">Höger</div>
 </div>
-<div class="mt-auto jumbotron jumbotron-fluid text-center bg-dark" style="margin-bottom:0">
+<footer class="mt-auto jumbotron jumbotron-fluid text-center color-darknight" style="margin-bottom:0">
     <p class="h3 text-white"></p>
-</div>
+</footer>
 
 </body>
 </html>

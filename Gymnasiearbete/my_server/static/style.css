@@ -1,11 +1,35 @@
-.search{
+.shadow {
+    box-shadow: 0 4px 2px -2px rgba(0,0,0,.2);
+} 
+
+.nav-color{
     color: grey;
 }
 
-.search:hover{
+.nav-color:hover{
     color: lightgray;
 }
 
 .min-h-col {
-    min-height: 59.9vh;
+    min-height: 79.5vh;
+}
+
+.color-cherry {
+    color: #F2505D;
+}
+
+.color-strawberry {
+    color: #F23D3D;
+}
+
+.color-nightgray {
+    background-color: #403D3E;
+}
+
+.color-darknight {
+    background-color: #262223;
+}
+
+.color-lgray {
+    color: #BFBFBF;
 }
