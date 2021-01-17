@@ -2,20 +2,32 @@ from my_server import app
 from flask import render_template as rt
 from flask import request, redirect, url_for,flash, abort, session
 from my_server.databasehandler import create_connection
+import json
 
 #db_test.db ligger i gitignore !!!!!!
-def sql_request(sql):
-    con = create_connection()
-    cur = con.cursor()
-    cur.execute(sql)
-    return cur.fetchall()
+#TODO: innan inlämning gör en 'riktig' databas med lite bättre struktur och namn
 
+#utför en sql request och hämtar samtliga resultat, inte skyddad från sql-injektioner!!! ska inte användas av användare
+def sql_request(sql):
+    conn = create_connection()
+    cur = conn.cursor()
+    cur.execute(sql)
+    result = cur.fetchall()
+    conn.close()
+    return result
+
+# utför en sql request och hämtar samtliga resultat, skyddad från sql-injektioner, kan använads av användare
+# sql == sql query
+# data = data som ska sökas efter (prepared statment)
 def sql_request_prepared(sql,data):
     conn = create_connection()
     cur = conn.cursor()
     cur.execute(sql,data)
     conn.commit()
-    return cur.fetchall()
+    result = cur.fetchall()
+    conn.close()
+    return result
+
 
 @app.route('/')
 @app.route('/index')
@@ -29,49 +41,48 @@ def start():
 @app.route('/categories/')
 @app.route('/categories/<id>')
 def categories(id = 0):
-    if request.method == 'POST':
-        #sök efter kategorier
-        pass
-    else:
-        #main_category = 0 -> huvudkategorier
-        return rt('categories.html', categories=sql_request_prepared('SELECT name, main_category FROM categories WHERE main_category = ?',(id,)))
-
-@app.route('/get_categories_post', methods = ['GET,POST'])
-def categories_post():
-    if request.method == 'POST':
-            #sök efter produkter
-            return '<h1>aaaaaaaaaaaaaaa</h1>'
-
+    #main_category = 0 -> huvudkategorier
+    return rt('categories.html', categories=sql_request_prepared('SELECT name, main_category FROM categories WHERE main_category = ?',(id,)))
 
 @app.route('/products')
 @app.route('/products/')
-@app.route('/products/<id>')
-def products(id=0):
-    if id == 0:
+@app.route('/products/<category>')
+def products(category=0):
+    if category == 0:
         return rt('products.html',products=sql_request('SELECT name FROM products'))
-    return rt('products.html',products=sql_request_prepared('SELECT name, category FROM products WHERE category = ?',(id,)))
+    return rt('products.html',products=sql_request_prepared('SELECT name, category FROM products WHERE category = ?',(category,)))
 
-@app.route('/get_products_post', methods = ['GET,POST'])
-def products_post():
-    #gör om
-    if request.method == 'POST':
-        action = request.form['action']
-        if action == 'search':
-            search = request.form['input']
-            response = sql_request_prepared('SELECT * FROM products WHERE name = ?',(search,))
-            return rt('products.html',products=response)
-        elif action == 'sort':
-            type = request.form['type']
-            if type == 'cheapest':
-                pass
-            else:
-                pass
-        return '<h1>aaaaaaaaaaaaaaa</h1>'
+@app.route('/product/<id>')
+def product(id = 0):
+    product = sql_request_prepared('SELECT * FROM products WHERE id = ?',(id,))
+    pictures = sql_request_prepared('SELECT filepath FROM pictures WHERE product_id = ?',(id,))
+    return rt('product.html',product=product,pictures=pictures)
 
-@app.route('/search_products_categories', methods = ['GET,POST'])
-@app.route('/search_products_categories/<search>', methods = ['GET'])
+#inmatning till sökfunktionen är en string -> produkten / kategorins namn
+#TODO: skriv klart get funktionen så att den oxå kan skicka data från sökning
+@app.route('/search_products_categories', methods = ['POST','GET'])
+@app.route('/search_products_categories/<search>')
 def search(search = ''):
+    #borde fungera
     if request.method == 'POST':
-        pass
+        search = request.form['search']
+        products = sql_request_prepared('SELECT * FROM products WHERE name LIKE ?',('%'+search+'%',))
+        categories = sql_request_prepared('SELECT * FROM categories WHERE name LIKE ?',('%'+search+'%',))
+        return json.dumps({'products':products,'categories':categories})
     else:
-        pass
+        return redirect(url_for('products'))
+
+#TODO: klart denna funktion
+#ska kolla om användaren finns först
+#sen skapa användaren (med hashat lösenord)
+@app.route('/sign_up', methods=['GET','POST'])
+def sign_up():
+    if request.method == 'POST':
+        f_name = request.form['f_name']
+        l_name = request.form['l_name']
+        username = request.form['u_name']
+        e_mail = request.form['e_mail']
+        password = request.form['password']
+        #skriv klart
+    else:
+        return rt('sign_up.html')

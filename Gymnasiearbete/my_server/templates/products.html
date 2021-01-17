@@ -6,7 +6,8 @@
 {% endfor %}
 
 
-<form action="{{url_for('products_post')}}" method="post">
-    <input type="submit" name="upvote" value="Upvote" />
+<form action="{{url_for('search')}}" method="post">
+    <input type="text" name = "search" />
+    <input type="submit" name="sök" value="search" />
 </form>
 {% endblock%}
