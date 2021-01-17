@@ -52,6 +52,7 @@ new_categories = [
 
 cur.executemany('INSERT INTO categories (name,description,main_category) VALUES (?,?,?)', new_categories)
 
+#Ta bort kanske?
 cur.execute('''CREATE TABLE IF NOT EXISTS produts_categories (
     id INTEGER PRIMARY KEY,
     product_id INTEGER REFERENCES product(id),
@@ -64,25 +65,27 @@ cur.executemany('INSERT INTO produts_categories (product_id,category_id) VALUES 
 
 cur.execute('''CREATE TABLE IF NOT EXISTS pictures (
     id INTEGER PRIMARY KEY,
-    filepath TEXT NOT NULL
+    filepath TEXT NOT NULL,
+    product_id INTEGER REFERENCES product(id)
 )''')
 
 pictures_location = 'Gymnasiearbete\my_server\static\images'
 
 new_pictures = [
-    ('my_server\static\imagesp1i1.jpg',),
-    ('my_server\static\imagesp1i2.jpg',),
-    ('my_server\static\imagesp1i3.jpg',),
-    ('my_server\static\imagesp2i1.jpg',),
-    ('my_server\static\imagesp2i2.jpg',),
-    ('my_server\static\imagesp2i3.jpg',),
-    ('my_server\static\imagesp3i1.jpg',),
-    ('my_server\static\imagesp3i2.jpg',),
-    ('my_server\static\imagesp3i3.jpg',)
+    ('static/images/p1i1.jpg',1),
+    ('static/images/p1i2.jpg',1),
+    ('static/images/p1i3.jpg',1),
+    ('static/images/p2i1.jpg',2),
+    ('static/images/p2i3.jpg',2),
+    ('static/images/p2i3.jpg',2),
+    ('my_server\static\imagesp3i1.jpg',3),
+    ('my_server\static\imagesp3i2.jpg',3),
+    ('my_server\static\imagesp3i3.jpg',3)
     ]
 
-cur.executemany('INSERT INTO pictures (filepath) VALUES (?)', new_pictures)
+cur.executemany('INSERT INTO pictures (filepath,product_id) VALUES (?,?)', new_pictures)
 
+#Ta bort?
 cur.execute('''CREATE TABLE IF NOT EXISTS products_pictures (
     id INTEGER PRIMARY KEY,
     product_id INTEGER REFERENCES product(id),
