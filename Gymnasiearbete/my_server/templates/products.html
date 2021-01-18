@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{%block content%}
+{% for product in products %}
+<h1>{{product[0]}}</h1>
+{% endfor %}
+
+
+<form action="{{url_for('search')}}" method="post">
+    <input type="text" name = "search" />
+    <input type="submit" name="sök" value="search" />
+</form>
+{% endblock%}
