@@ -48,9 +48,13 @@ def categories(id = 0):
 @app.route('/products/')
 @app.route('/products/<category>')
 def products(category=0):
-    if category == 0:
-        return rt('products.html',products=sql_request('SELECT name FROM products'))
-    return rt('products.html',products=sql_request_prepared('SELECT name, category FROM products WHERE category = ?',(category,)))
+    if 'search_data' in session:
+        data = session['search_data']
+        session.pop('search_data')
+        return rt('products.html',products=data)
+    elif category == 0:
+        return rt('products.html',products=sql_request('SELECT * FROM products'))
+    return rt('products.html',products=sql_request_prepared('SELECT * FROM products WHERE category = ?',(category,)))
 
 @app.route('/product/<id>')
 def product(id = 0):
@@ -70,7 +74,9 @@ def search(search = ''):
         categories = sql_request_prepared('SELECT * FROM categories WHERE name LIKE ?',('%'+search+'%',))
         return json.dumps({'products':products,'categories':categories})
     else:
+        session['search_data']=sql_request_prepared('SELECT * FROM products WHERE name LIKE ?',('%'+search+'%',))
         return redirect(url_for('products'))
+        #return rt('products.html',product=sql_request_prepared('SELECT * FROM products WHERE name LIKE ?',('%'+search+'%',)))
 
 #TODO: klart denna funktion
 #ska kolla om användaren finns först
