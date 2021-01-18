@@ -1,17 +1,25 @@
-.shadow {
+.shadow-bottom {
     box-shadow: 0 4px 2px -2px rgba(0,0,0,.2);
+} 
+
+.shadow-top {
+    box-shadow: 0 -4px 2px -2px rgba(0,0,0,.2);
 } 
 
 .nav-color{
     color: grey;
 }
 
-.nav-color:hover{
+.nav-color:hover {
     color: lightgray;
 }
 
+.right {
+    float: right;
+}
+
 .min-h-col {
-    min-height: 79.5vh;
+    min-height: 100%;
 }
 
 .color-cherry {
@@ -28,6 +36,10 @@
 
 .color-darknight {
     background-color: #262223;
+}
+
+.color-darkernight {
+    background-color: #1a1717 !important;
 }
 
 .color-lgray {
