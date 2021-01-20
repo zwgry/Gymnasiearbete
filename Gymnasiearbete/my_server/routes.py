@@ -73,7 +73,7 @@ def search(search = ''):
         search = request.form['search']
         products = sql_request_prepared('SELECT * FROM products WHERE name LIKE ?',('%'+search+'%',))
         categories = sql_request_prepared('SELECT * FROM categories WHERE name LIKE ?',('%'+search+'%',))
-        return json.dumps({'products':products,'categories':categories})
+        return json.dumps((products,categories))
     else:
         session['search_data']=sql_request_prepared('SELECT * FROM products WHERE name LIKE ?',('%'+search+'%',))
         return redirect(url_for('products'))

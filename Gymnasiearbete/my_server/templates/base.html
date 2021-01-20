@@ -21,10 +21,7 @@
             <a class="navbar-brand nav-color" href="" style="text-align: c;">Brand</a>
         </li>
         <li class="nav-item">
-            <input class="nav-link form-control" type="search" style="width: auto;" onkeyup="search(this.value)" placeholder="Search">
-        </li>
-        <li class="nav-item">
-            <a class="nav-link nav-color" href="#_"><i class="fa fa-search mr-1"></i></a>
+            <input class="form-control" type="text"  onkeyup="search(this.value)" placeholder="Sök">
         </li>
         <li class="nav-item">
             <a class="nav-link nav-color" href=""><i class="fa fa-user mr-1"></i></a> </li>
@@ -38,11 +35,7 @@
 <div class="row flex-grow-1 shadow-bottom" style="margin-right: 0px;">
     <div class="col-sm-2 color-darknight" style="text-align: right; color: whitesmoke;">Vänster</div>
     <div class="col-sm-8 color-nightgray" style="text-align: center;">
-        <div class="p-3">
-            <img src="../static/images/patrik shooting star.gif" alt="PATRIK STAR SHOTTER" width="1000px" height="300px">
-        </div>
-        {%block content%}
-        {% endblock%}
+        {%block content%}{% endblock%}
     </div>
     <div class="col-sm-2 color-darknight" style="color: whitesmoke;">Höger</div>
 </div>
