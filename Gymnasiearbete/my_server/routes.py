@@ -8,6 +8,7 @@ import json
 #TODO: innan inlämning gör en 'riktig' databas med lite bättre struktur och namn
 
 #utför en sql request och hämtar samtliga resultat, inte skyddad från sql-injektioner!!! ska inte användas av användare
+# sql == sql query
 def sql_request(sql):
     conn = create_connection()
     cur = conn.cursor()
@@ -84,11 +85,29 @@ def search(search = ''):
 @app.route('/sign_up', methods=['GET','POST'])
 def sign_up():
     if request.method == 'POST':
-        f_name = request.form['f_name']
-        l_name = request.form['l_name']
-        username = request.form['u_name']
-        e_mail = request.form['e_mail']
-        password = request.form['password']
-        #skriv klart
+        f_name = request.form['fname']
+        l_name = request.form['lname']
+        username = request.form['uname']
+        email = request.form['email']
+        password = request.form['password1']
+        password2 = request.form['password2']
+        current_users = sql_request('SELECT username,email FROM users')
+        for user in current_users:
+            if user[0] == username:
+                flash('NAMMMMMMMMMMMMMMN','warning')
+                return rt('sign_up.html')
+            elif user[1] == email:
+                flash('mAILLLLLLLLLLLLLLLLLL','warning')
+                return rt('sign_up.html')
+        #MÅSTE HASHAS
+        if password == password2:
+            new_user=(f_name+' ' +l_name,username,email,password)
+            #conn = create_connection()
+            #cur = conn.cursor()
+            #cur.execute('INSERT INTO users (name,username,email,password) VALUES (?,?,?,?)', new_user)
+            #conn.commit()
+            #conn.close()
+            #skriv klart
+            return f'{new_user}'
     else:
         return rt('sign_up.html')
