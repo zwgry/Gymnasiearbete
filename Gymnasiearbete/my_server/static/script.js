@@ -6,8 +6,10 @@ function search(inmatning) {
             if (searchItem == "") document.getElementById("x").innerHTML = "";
             else {
                 let s = "";
-                for (let i = 0; i < searchItem.length; i++) {
-                    s += "<tr><td>" + searchItem[i][1] + "</td></tr>";
+                for (let j = 0; j < searchItem.length; j++ ) {
+                    for (let i = 0; i < searchItem[j].length; i++) {
+                        s += "<tr><td>" + searchItem[j][i][1] + "</td></tr>";
+                    }
                 }
                 document.getElementById("x").innerHTML = s;
             }
