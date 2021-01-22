@@ -2,12 +2,14 @@ from my_server import app
 from flask import render_template as rt
 from flask import request, redirect, url_for,flash, abort, session
 from my_server.databasehandler import create_connection
+import bcrypt
 import json
 
 #db_test.db ligger i gitignore !!!!!!
 #TODO: innan inlämning gör en 'riktig' databas med lite bättre struktur och namn
 
 #utför en sql request och hämtar samtliga resultat, inte skyddad från sql-injektioner!!! ska inte användas av användare
+# sql == sql query
 def sql_request(sql):
     conn = create_connection()
     cur = conn.cursor()
@@ -28,6 +30,15 @@ def sql_request_prepared(sql,data):
     conn.close()
     return result
 
+
+# utför en sql request som skapar en till användare i tabellen users
+# user = användaren som ska skapas
+def insert_user(user):
+    conn = create_connection()
+    cur = conn.cursor()
+    cur.execute('INSERT INTO users (name,username,email,password) VALUES (?,?,?,?)',user)
+    conn.commit()
+    conn.close()
 
 @app.route('/')
 @app.route('/index')
@@ -78,17 +89,55 @@ def search(search = ''):
         return redirect(url_for('products'))
         #return rt('products.html',product=sql_request_prepared('SELECT * FROM products WHERE name LIKE ?',('%'+search+'%',)))
 
+#Klar??
+@app.route('/login', methods=['GET','POST'])
+def login():
+    if request.method == 'POST':
+        username = request.form['username']
+        password = request.form['password']
+        users = sql_request('SELECT username,password FROM users')
+        for user in users:
+            if user[0] == username:
+                if bcrypt.checkpw(password.encode('utf-8'),user[1]):
+                    flash('inloggad','success')
+                    return redirect(url_for('start'))
+                    session['username'] = username
+                    session['logged_in'] = True
+        flash('användarnamnet eller lösenordet är felaktigt','warning')
+    return rt('login.html')
+
+#Klar?
+@app.route('/logout')
+def logout():
+    session.pop('username',None)
+    session['logged_in'] = False
+    flash('Du har loggats ut','info')
+    return redirect(url_for('start'))
+
 #TODO: klart denna funktion
-#ska kolla om användaren finns först
-#sen skapa användaren (med hashat lösenord)
+#Klar??
 @app.route('/sign_up', methods=['GET','POST'])
 def sign_up():
     if request.method == 'POST':
-        f_name = request.form['f_name']
-        l_name = request.form['l_name']
-        username = request.form['u_name']
-        e_mail = request.form['e_mail']
-        password = request.form['password']
-        #skriv klart
+        f_name = request.form['fname']
+        l_name = request.form['lname']
+        username = request.form['uname']
+        email = request.form['email']
+        password = request.form['password1']
+        password2 = request.form['password2']
+        current_users = sql_request('SELECT username,email FROM users')
+        for user in current_users:
+            if user[0] == username:
+                flash('användarnamnet används redan','warning')
+                return rt('sign_up.html')
+            elif user[1] == email:
+                flash('mailen används redan','warning')
+                return rt('sign_up.html')
+        if password == password2:
+            hashed_password = bcrypt.hashpw(password.encode('utf-8'),bcrypt.gensalt())
+            new_user=(f_name+' ' +l_name,username,email,hashed_password)
+            insert_user(new_user)
+            flash('användare skapad','success')
+            return redirect(url_for('login'))
     else:
         return rt('sign_up.html')

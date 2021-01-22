@@ -1,5 +1,38 @@
 {% extends 'base.html' %}
 
 {%block content%}
-<h1>apa</h1>
+<div class="container">
+    <form action="{{url_for('sign_up')}}" method='post'>
+        <div class="form-group">
+            <label>Förnamn</label>
+            <input type="name" class="form-control" name="fname" placeholder="Förnamn">
+        </div>
+        <div class="form-group">
+            <label>Efternamn</label>
+            <input type="name" class="form-control" name="lname" placeholder="Efternamn">
+        </div>
+        <div class="form-group">
+            <label for="exampleInputEmail1">Användarnamn</label>
+            <input type="name" class="form-control" name="uname" placeholder="Användarnamn">
+        </div>
+        <div class="form-group">
+            <label for="exampleInputEmail1">Mailadress</label>
+            <input type="email" class="form-control" name="email" placeholder="Mailadress">
+        </div>
+        <div class="form-group">
+            <label for="exampleInputPassword1">Lösenord</label>
+            <input type="password" class="form-control" name="password1" placeholder="Lösenord">
+        </div>
+        <div class="form-group">
+            <label for="exampleInputPassword1">Återuppreda lösenord</label>
+            <input type="password" class="form-control" name="password2" placeholder="Återuppreda lösenord">
+        </div>
+        <button type="submit" class="btn btn-primary">Skapa konto</button>
+    </form>
+    <div class="pt-3">
+        <small class="text-muted">
+            Har du redan ett konto? <a href="{{url_for('login')}}" class="ml-2">Logga in här!</a>
+        </small>
+    </div>
+</div>
 {% endblock%}
