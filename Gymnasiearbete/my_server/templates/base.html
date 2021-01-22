@@ -36,6 +36,11 @@
     <div class="col-sm-2 color-darknight" style="text-align: right; color: whitesmoke;">Vänster</div>
     <div class="col-sm-8 color-nightgray" style="text-align: center;">
         {%block content%}{% endblock%}
+        <div style="width: 50%; margin-left: auto; margin-right: auto;">
+            {% for category, message in get_flashed_messages(with_categories = True) %}
+                    <p class="alert alert-{{category}} alert-dismissible fade show mt-3"><button type="button" class="close" data-dismiss="alert">&times;</button> {{ message }} </p>          
+            {% endfor %}
+        </div>
     </div>
     <div class="col-sm-2 color-darknight" style="color: whitesmoke;">Höger</div>
 </div>
