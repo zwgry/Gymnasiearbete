@@ -69,7 +69,7 @@ def product(id = 0):
 def search(search = ''):
     #borde fungera
     if request.method == 'POST':
-        search = request.form['search']
+        search = request.form['inmatning']
         products = sql_request_prepared('SELECT * FROM products WHERE name LIKE ?',('%'+search+'%',))
         categories = sql_request_prepared('SELECT * FROM categories WHERE name LIKE ?',('%'+search+'%',))
         return json.dumps((products,categories))
