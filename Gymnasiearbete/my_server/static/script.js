@@ -17,7 +17,9 @@ function searchFunction(input) {
                             for (let i = 0; i < response[j].length; i++) {
                                 s += "<a class='dropdown-item' href='#'>" + response[j][i][1] + "</a>";
                             }
+                            if (j == 0) {
                             s += "<h5 class='dropdown-header'>Kategori</h5>";
+                            }
                         }
                         $("#searchDropdownMenu").html(s);
                     }
