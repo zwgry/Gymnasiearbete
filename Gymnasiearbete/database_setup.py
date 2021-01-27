@@ -101,12 +101,13 @@ cur.execute('''CREATE TABLE IF NOT EXISTS users (
     name TEXT NOT NULL,
     username TEXT NOT NULL,
     email TEXT NOT NULL,
-    password TEXT NOT NULL
+    password TEXT NOT NULL,
+    admin INTEGER NOT NULL
 )''')
 
-new_users = [('admin','admin','admin','admin'),('Mathias','mathias','mathias.wistrom@edu.nacka.se','lösen123'),('Lukas','lukas','lukas.strand@edu.nacka.se','lösen123')]
+new_users = [('admin','admin','admin@gmail.com',b'$2b$12$mGSFnbjslxrgz2T18N2YQuQEo3aiTX.sHzkptZLfLxpygg81E7v8C',1)]
 
-cur.executemany('INSERT INTO users (name,username,email,password) VALUES (?,?,?,?)', new_users)
+cur.executemany('INSERT INTO users (name,username,email,password,admin) VALUES (?,?,?,?,?)', new_users)
 
 cur.execute('''CREATE TABLE IF NOT EXISTS lists (
     id INTEGER PRIMARY KEY,

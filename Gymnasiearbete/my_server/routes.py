@@ -36,7 +36,7 @@ def sql_request_prepared(sql,data):
 def insert_user(user):
     conn = create_connection()
     cur = conn.cursor()
-    cur.execute('INSERT INTO users (name,username,email,password) VALUES (?,?,?,?)',user)
+    cur.execute('INSERT INTO users (name,username,email,password,admin) VALUES (?,?,?,?,?)',user)
     conn.commit()
     conn.close()
 
@@ -101,11 +101,11 @@ def login():
         users = sql_request('SELECT username,password FROM users')
         for user in users:
             if user[0] == username:
-                if bcrypt.checkpw(password.encode('utf-8'),user[1]):
+                if bcrypt.checkpw(password.encode('utf-8'),user[1]): #AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
                     flash('inloggad','success')
-                    return redirect(url_for('start'))
                     session['username'] = username
                     session['logged_in'] = True
+                    return redirect(url_for('start'))
         flash('användarnamnet eller lösenordet är felaktigt','warning')
     return rt('login.html')
 
@@ -138,9 +138,19 @@ def sign_up():
                 return rt('sign_up.html')
         if password == password2:
             hashed_password = bcrypt.hashpw(password.encode('utf-8'),bcrypt.gensalt())
-            new_user=(f_name+' ' +l_name,username,email,hashed_password)
+            new_user=(f_name+' ' +l_name,username,email,hashed_password,0)
             insert_user(new_user)
             flash('användare skapad','success')
             return redirect(url_for('login'))
     else:
         return rt('sign_up.html')
+
+@app.route('/admin')
+def admin():
+    if session['logged_in'] == False:
+        print(session['logged_in'])
+        return redirect(url_for('login'))
+    admin = sql_request_prepared('SELECT admin FROM users WHERE username like ?',(session['username'],)) 
+    if admin[0][0] != 1:
+        abort(401)
+    return rt('admin.html')
