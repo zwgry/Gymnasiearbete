@@ -4,12 +4,10 @@
 
 {%block content%}
     <ul>
-        {% for product in products %}
-        <a href="{{url_for('admin_edit',id=product[0])}}">
+        {% for data in product[0] %}
             <li>
-                {{product[1]}}
-            </li>
-        </a>
+                {{data}}
+            </li>        
         {% endfor %}
     </ul>
 {% endblock%}

@@ -2,6 +2,7 @@ from my_server import app
 from flask import render_template as rt
 from flask import request, redirect, url_for,flash, abort, session
 from my_server.databasehandler import create_connection
+from functools import wraps
 import bcrypt
 import json
 
@@ -30,7 +31,6 @@ def sql_request_prepared(sql,data):
     conn.close()
     return result
 
-
 # utför en sql request som skapar en till användare i tabellen users
 # user = användaren som ska skapas
 def insert_user(user):
@@ -39,6 +39,46 @@ def insert_user(user):
     cur.execute('INSERT INTO users (name,username,email,password,admin) VALUES (?,?,?,?,?)',user)
     conn.commit()
     conn.close()
+
+# kollar om användaren är en admin
+def admin_required(f):
+    @wraps(f)
+    def wraped(*args, **kwargs):
+        if 'logged_in' in session:
+            if session['logged_in'] == False:
+                print(session['logged_in'])
+                return redirect(url_for('login'))
+            admin = sql_request_prepared('SELECT admin FROM users WHERE username like ?',(session['username'],)) 
+            if admin[0][0] != 1:
+                return abort(401)
+            else:
+                return f(*args,**kwargs)
+        else:
+            return abort(401)
+    
+    return wraped
+
+# kollar om användaren är inloggad
+def login_required(f):
+    @wraps(f)
+    def wraped(*args, **kwargs):
+        if 'logged_in' in session:
+            return f(*args,**kwargs)
+        else:
+            flash('Du måste vara inloggad för att kunna göra detta!', 'warning')
+            return redirect(url_for('login'))
+    return wraped
+
+# kollar om användaren är utloggad
+def no_login(f):
+    @wraps(f)
+    def wraped(*args, **kwargs):
+        if 'logged_in' not in session:
+            return f(*args,**kwargs)
+        else:
+            flash('Du kan inte vara inloggad för att kunna göra detta!', 'warning')
+            return redirect(url_for('start'))
+    return wraped
 
 @app.route('/')
 @app.route('/index')
@@ -94,6 +134,7 @@ def search(search = ''):
 
 #Klar??
 @app.route('/login', methods=['GET','POST'])
+@no_login
 def login():
     if request.method == 'POST':
         username = request.form['username']
@@ -111,16 +152,17 @@ def login():
 
 #Klar?
 @app.route('/logout')
+@login_required
 def logout():
-    session.pop('username',None)
-    session['logged_in'] = False
+    session.clear()
+    #gc.collect()
     flash('Du har loggats ut','info')
     return redirect(url_for('start'))
 
 #TODO: klart denna funktion
 #Klar??
-@app.route('/sign_up', methods=['GET','POST'])
-def sign_up():
+@app.route('/register', methods=['GET','POST'])
+def register():
     if request.method == 'POST':
         f_name = request.form['fname']
         l_name = request.form['lname']
@@ -146,11 +188,19 @@ def sign_up():
         return rt('sign_up.html')
 
 @app.route('/admin')
+@admin_required
 def admin():
-    if session['logged_in'] == False:
-        print(session['logged_in'])
-        return redirect(url_for('login'))
-    admin = sql_request_prepared('SELECT admin FROM users WHERE username like ?',(session['username'],)) 
-    if admin[0][0] != 1:
-        abort(401)
-    return rt('admin.html')
+    return rt('admin.html',products = sql_request('SELECT * FROM products'))
+
+@app.route('/admin/edit/<id>')
+@admin_required
+def admin_edit(id = None):
+    if id == None:
+        return redirect(url_for('admin'))
+    product = sql_request_prepared('SELECT * FROM products WHERE id = ?',(id,))
+    return rt('edit_product.html',product = product)
+
+@app.route('/admin/add')
+@admin_required
+def admin_add():
+    return redirect(url_for('admin'))
