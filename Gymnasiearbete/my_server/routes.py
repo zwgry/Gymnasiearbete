@@ -82,7 +82,7 @@ def search(search = ''):
     if request.method == 'POST':
         search = request.form['parameter']
         if search == "": 
-            return ""
+            return json.dumps("empty")
         products = sql_request_prepared('SELECT * FROM products WHERE name LIKE ?',('%'+search+'%',))
         categories = sql_request_prepared('SELECT * FROM categories WHERE name LIKE ?',('%'+search+'%',))
         print(json.dumps((products, categories)))
