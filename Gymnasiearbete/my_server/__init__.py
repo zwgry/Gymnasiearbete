@@ -1,7 +1,8 @@
 from flask import Flask
+import os
 
 app = Flask(__name__)
-app.secret_key = 'aaoaao'
+app.secret_key = os.urandom(32)
 
 from my_server.main.routes import main
 from my_server.shop.routes import shop
