@@ -2,7 +2,7 @@
 
 {%block content%}
 <div class="container">
-    <form action="{{url_for('register')}}" method='post'>
+    <form action="{{url_for('users.register')}}" method='post'>
         <div class="form-group">
             <label>Förnamn</label>
             <input type="name" class="form-control" name="fname" placeholder="Förnamn">
@@ -31,7 +31,7 @@
     </form>
     <div class="pt-3">
         <small class="text-muted">
-            Har du redan ett konto? <a href="{{url_for('login')}}" class="ml-2">Logga in här!</a>
+            Har du redan ett konto? <a href="{{url_for('users.login')}}" class="ml-2">Logga in här!</a>
         </small>
     </div>
 </div>
