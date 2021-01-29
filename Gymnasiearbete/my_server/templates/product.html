@@ -1,9 +1,26 @@
 {% extends 'base.html' %}
 
-{%block content%}
+<!--
 <h1>{{product[0][1]}}</h1>
 <h3>{{product[0][2]}}</h3>
 {% for picture in pictures %}
-<img src="/{{picture[0]}}" alt="{{picture[0]}}" width="500" height="600"> 
-{%endfor%}
-{% endblock%}
+<img src="/{{picture[0]}}" alt="{{picture[0]}}" width="600" height="500"> 
+{%endfor%}-->
+
+{%block content%}
+
+<div class="row">
+    <div class="col-sm-6">
+        <div class="p-3">
+            <img src="../static/images/patrik shooting star.gif" alt="PATRIK STAR SHOTTER">
+        </div>
+    </div>
+    <div class="col-sm-6">
+        <h1 style="color: honeydew;">{{product[0][1]}}</h1>
+    </div>
+    <div class="col">
+        <h3 style="color: honeydew;">{{product[0][2]}}</h3>
+    </div>
+</div>
+
+{%endblock%}

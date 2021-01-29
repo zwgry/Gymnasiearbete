@@ -45,3 +45,8 @@
 .color-lgray {
     color: #BFBFBF;
 }
+
+.search-text-overflow {
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
