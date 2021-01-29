@@ -1,6 +1,7 @@
 from my_server.databasehandler import create_connection
 from flask import redirect, url_for, flash, abort, session
 from my_server.databasehandler import create_connection
+from my_server.models import User
 from functools import wraps
 
 # kollar om användaren är en admin
@@ -11,8 +12,8 @@ def admin_required(f):
             if session['logged_in'] == False:
                 print(session['logged_in'])
                 return redirect(url_for('users.login'))
-            admin = sql_request_prepared('SELECT admin FROM users WHERE username like ?',(session['username'],)) 
-            if admin[0][0] != 1:
+            admin = User.query.filter_by(username=session['username']).first()
+            if admin.admin == False:
                 return abort(401)
             else:
                 return f(*args,**kwargs)
