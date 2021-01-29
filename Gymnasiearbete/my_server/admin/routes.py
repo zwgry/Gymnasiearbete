@@ -1,6 +1,6 @@
 from flask import redirect, url_for, request, Blueprint
 from flask import render_template as rt
-from my_server.admin.utils import admin_required, sql_request, sql_request_prepared, insert_user, update_data
+from my_server.admin.utils import admin_required, sql_request, sql_request_prepared, insert_user
 
 admin = Blueprint('admin',__name__)
 
