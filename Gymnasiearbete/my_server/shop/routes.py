@@ -1,6 +1,6 @@
 from flask import redirect, url_for, session, request, Blueprint
 from flask import render_template as rt
-from my_server.shop.utils import sql_request, sql_request_prepared
+from my_server.shop.utils import sql_request, sql_request_prepared, sql_to_list
 from my_server.models import Category, Product, Picture
 import json
 
@@ -50,8 +50,7 @@ def search(search = ''):
             return json.dumps("empty")
         products = Product.query.filter(Product.name.like('%'+search+'%')).all()
         categories = Category.query.filter(Category.name.like('%'+search+'%')).all()
-        #TODO: HUR!!!!!!!!!!!!!!!!
-        print(json.dumps((products, categories)))
+        print(json.dumps(sql_to_list(products)))
         return json.dumps((products, categories))
     else:
         session['search_data']=Product.query.filter(Product.name.like('%'+search+'%')).all()

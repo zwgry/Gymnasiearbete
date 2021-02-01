@@ -11,6 +11,9 @@ class Product(db.Model):
     def __repr__(self):
         return f"Product('{self.name}','{self.id}')"
 
+    def as_dict(self):
+        return {p.name: getattr(self, p.name) for p in self.__table__.columns}
+
 class Picture(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     product_id = db.Column(db.Integer, db.ForeignKey('product.id'), nullable=False)
