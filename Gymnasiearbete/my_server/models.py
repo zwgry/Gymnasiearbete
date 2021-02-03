@@ -31,6 +31,9 @@ class Category(db.Model):
     def __repr__(self):
         return f"Category('{self.id}','{self.name}')"
 
+    def as_dict(self):
+        return {p.name: getattr(self, p.name) for p in self.__table__.columns}
+
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(120), unique=True, nullable=False)

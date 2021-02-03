@@ -10,10 +10,8 @@ shop = Blueprint('shop',__name__)
 @shop.route('/categories')
 @shop.route('/categories/')
 @shop.route('/categories/<id>')
-def categories(id = 0):
-    #main_category = 0 -> huvudkategorier
-    #sql_request_prepared('SELECT name, main_category FROM categories WHERE main_category = ?',(id,))
-    return rt('categories.html', categories=Category.query.filter_by(id=id).first())
+def categories(id = 1):
+    return rt('categories.html', categories=Category.query.filter_by(id=id).all())
 
 @shop.route('/products')
 @shop.route('/products/')
@@ -24,18 +22,13 @@ def products(category=0):
         session.pop('search_data')
         return rt('products.html',products=data)
     elif category == 0:
-        #sql_request('SELECT * FROM products')
         products = Product.query.all()
         print(products)
         return rt('products.html',products=products)
-    #sql_request_prepared('SELECT * FROM products WHERE category = ?',(category,))
-    print(Product.query.filter_by(category=category).all())
     return rt('products.html',products=Product.query.filter_by(category=category).all())
 
 @shop.route('/product/<id>')
 def product(id = 0):
-    #product = sql_request_prepared('SELECT * FROM products WHERE id = ?',(id,))
-    #pictures = sql_request_prepared('SELECT filepath FROM pictures WHERE product_id = ?',(id,))
     return rt('product.html',product=Product.query.filter_by(id=id).first(),pictures=Picture.query.filter_by(product_id=id).all())
 
 #inmatning till sökfunktionen är en string -> produkten / kategorins namn
@@ -50,8 +43,7 @@ def search(search = ''):
             return json.dumps("empty")
         products = Product.query.filter(Product.name.like('%'+search+'%')).all()
         categories = Category.query.filter(Category.name.like('%'+search+'%')).all()
-        print(json.dumps(sql_to_list(products)))
-        return json.dumps((products, categories))
+        return json.dumps((sql_to_list(products),sql_to_list(categories)))
     else:
         session['search_data']=Product.query.filter(Product.name.like('%'+search+'%')).all()
         return redirect(url_for('shop.products'))
