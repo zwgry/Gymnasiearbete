@@ -5,9 +5,9 @@
 {%block content%}
     <ul>
         {% for product in products %}
-        <a href="{{url_for('admin.admin_edit',id=product[0])}}">
+        <a href="{{url_for('admin.admin_edit',id=product.id)}}">
             <li>
-                {{product[1]}}
+                {{product.name}}
             </li>
         </a>
         {% endfor %}
