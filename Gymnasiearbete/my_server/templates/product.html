@@ -1,14 +1,5 @@
 {% extends 'base.html' %}
-
-<!--
-<h1>{{product[0][1]}}</h1>
-<h3>{{product[0][2]}}</h3>
-{% for picture in pictures %}
-<img src="/{{picture[0]}}" alt="{{picture[0]}}" width="600" height="500"> 
-{%endfor%}-->
-
 {%block content%}
-
 <div class="row">
     <div class="col-sm-6">
         <div class="slideshow-container">
@@ -23,9 +14,9 @@
         </div>
 
         <div style="text-align:center">
-            <span class="dot" onclick="currentSlide(1)"></span>
-            <span class="dot" onclick="currentSlide(2)"></span>
-            <span class="dot" onclick="currentSlide(3)"></span>
+            {% for i in range(pictures|length)%}
+            <span class="dot" onclick="currentSlide(i)"></span>
+            {%endfor%}
         </div>
     </div>
     <div class="col-sm-6">
