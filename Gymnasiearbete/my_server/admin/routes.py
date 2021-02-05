@@ -1,13 +1,14 @@
 from flask import redirect, url_for, request, Blueprint
 from flask import render_template as rt
 from my_server.admin.utils import admin_required, sql_request, sql_request_prepared, insert_user
+from my_server.models import Product
 
 admin = Blueprint('admin',__name__)
 
 @admin.route('/admin')
 @admin_required
 def admin_home():
-    return rt('admin.html',products = sql_request('SELECT * FROM products'))
+    return rt('admin.html',products = Product.query.all())
 
 @admin.route('/admin/edit/<id>', methods=['GET','POST'])
 @admin_required
@@ -19,7 +20,7 @@ def admin_edit(id = None):
         description = 'a'
         stock = 1
         #TODO: gör klart
-    product = sql_request_prepared('SELECT * FROM products WHERE id = ?',(id,))
+    product = Product.query.filter_by(id=id).first()
     return rt('edit_product.html',product = product)
 
 @admin.route('/admin/add')

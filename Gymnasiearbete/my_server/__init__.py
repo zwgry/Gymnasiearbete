@@ -1,8 +1,14 @@
 from flask import Flask
+from flask_sqlalchemy import SQLAlchemy
 import os
 
 app = Flask(__name__)
-app.secret_key = os.urandom(32)
+app.config['SECRET_KEY'] = os.urandom(32)
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///site.db'
+
+db = SQLAlchemy(app)
+
+from my_server.models import Product, Picture
 
 from my_server.main.routes import main
 from my_server.shop.routes import shop

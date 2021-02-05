@@ -1,4 +1,4 @@
-from my_server import app        # importera "app" från huvudpaketet
+from my_server import app
 
-if __name__ == '__main__':       # startar servern
+if __name__ == '__main__':
     app.run(host='localhost', port=8080, debug=True)
