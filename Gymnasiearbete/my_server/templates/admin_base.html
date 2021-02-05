@@ -14,20 +14,40 @@
 </head>
 <body class="d-flex flex-column min-vh-100 bg-secondary">
 
-<nav id="navbar" class="navbar navbar-expand-sm color-darknight shadow-bottom sticky-top">
-    <ul class="navbar-nav">
-        <li class="nav-item">
-            <a class="navbar-brand nav-color" href="{{url_for('admin.admin_home')}}" style="text-align: c;">Admin</a>
-        </li>
-        <li class="nav-item">
-            <a class="navbar-brand nav-color" href="{{url_for('main.start')}}" style="text-align: c;">Hem</a>
-        </li>
-    </ul>
+<nav id="navbar" class="navbar navbar-expand-md color-darknight shadow-bottom sticky-top">
+    <div class="row flex-grow-1" style="margin-right: 0px;">
+        <div class="col-sm-2">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="navbar-brand nav-color" href="">FÖRETAGSNAMN</a>
+                </li>
+            </ul>
+        </div>
+        <div class="col-sm-8">
+                <ul class="navbar-nav justify-content-center">
+                    <li class="nav-item dropdown" style="width: 75%;">
+                        <input class="form-control" type="text"  onkeyup="searchFunction(this.value)" placeholder="Sök" data-toggle="dropdown">
+                        <div id="searchDropdownMenu" class="dropdown-menu" style="width: 100%;">
+                        </div>
+                    </li>
+                </ul>
+        </div>
+        <div class="col-sm-2">
+            <ul class="navbar-nav" style="float: right;">
+                <li class="nav-item">
+                    <a class="nav-link nav-color" href=""><i class="fa fa-user mr-1"></i></a> </li>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link nav-color" href=""><i class="fa fa-shopping-cart"></i></a> </li>
+                </li>
+            </ul>
+        </div>
+    </div>
 </nav>
 
 <div class="row flex-grow-1 shadow-bottom" style="margin-right: 0px;">
-    <div class="col-sm-2" style="text-align: right; background-color: rgb(218, 218, 218);"></div>
-    <div class="col-sm-8" style="text-align: center; background-color: whitesmoke;">
+    <div class="col-sm-2 color-darknight">{%block left%}{%endblock%}</div>
+    <div class="col-sm-8 color-nightgray" style="text-align: center;">
         {%block content%}{% endblock%}
         <div style="width: 50%; margin-left: auto; margin-right: auto;">
             {% for category, message in get_flashed_messages(with_categories = True) %}
@@ -35,7 +55,7 @@
             {% endfor %}
         </div>
     </div>
-    <div class="col-sm-2 color-darknight" style="background-color: rgb(218, 218, 218);"></div>
+    <div class="col-sm-2 color-darknight">{%block right%}{%endblock%}</div>
 </div>
 
 <div #footer class="mt-auto color-darkernight jumbotron jumbotron-fluid text-center" style="margin-bottom: 0;">

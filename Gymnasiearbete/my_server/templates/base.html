@@ -46,7 +46,7 @@
 </nav>
 
 <div class="row flex-grow-1 shadow-bottom" style="margin-right: 0px;">
-    <div class="col-sm-2 color-darknight" style="text-align: right; color: whitesmoke;">Vänster</div>
+    <div class="col-sm-2 color-darknight">{%block left%}{%endblock%}</div>
     <div class="col-sm-8 color-nightgray" style="text-align: center;">
         {%block content%}{% endblock%}
         <div style="width: 50%; margin-left: auto; margin-right: auto;">
@@ -55,7 +55,7 @@
             {% endfor %}
         </div>
     </div>
-    <div class="col-sm-2 color-darknight" style="color: whitesmoke;">Höger</div>
+    <div class="col-sm-2 color-darknight">{%block right%}{%endblock%}</div>
 </div>
 
 <div #footer class="mt-auto color-darkernight jumbotron jumbotron-fluid text-center" style="margin-bottom: 0;">

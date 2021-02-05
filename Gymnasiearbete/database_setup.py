@@ -76,7 +76,7 @@ new_pictures = [
     ('static/images/p1i2.jpg',1),
     ('static/images/p1i3.jpg',1),
     ('static/images/p2i1.jpg',2),
-    ('static/images/p2i3.jpg',2),
+    ('static/images/p2i2.jpg',2),
     ('static/images/p2i3.jpg',2),
     ('my_server\static\imagesp3i1.jpg',3),
     ('my_server\static\imagesp3i2.jpg',3),
