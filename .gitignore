@@ -2,4 +2,8 @@
 db_test.db
 workspace.code-workspace
 README.md
-*/__pycache__/*
+Gymnasiearbete/my_server/__pycache__
+Gymnasiearbete/my_server/admin/__pycache__
+Gymnasiearbete/my_server/shop/__pycache__
+Gymnasiearbete/my_server/users/__pycache__
+Gymnasiearbete/my_server/main/__pycache__
