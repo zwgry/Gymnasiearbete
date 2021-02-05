@@ -45,10 +45,10 @@ function addHref(response,id){
             console.log("apapa");
             var a = document.getElementById("dropdown"+current_id); //or grab it by tagname etc
             if (j == 0){
-
-                a.href = "{{url_for('shop.product',id="+current_id+")}}";
+                a.href = "/product/"+response[j][i]['id'];
+                //a.href = "{{url_for('shop.product',id="+current_id+")}}";
             } else {
-                a.href = "{{url_for('shop.category',id="+current_id+")}}";                
+                a.href = "/categories/"+response[j][i]['id'];
             }
             current_id++;
             if (current_id > id){
