@@ -7,7 +7,6 @@ function searchFunction(input) {
         },
         dataType: "json",
         success: function(response) {
-            console.log(response);
             if (response == "empty"){
                 $("#searchDropdownMenu").hide();
                 return null;
@@ -35,18 +34,13 @@ function searchDropdown() {
     document.getElementById("searchDropdown").datatoggle;
 }
 
-//Fungerar inte måste fixas
 function addHref(response,id){
     let current_id = 1;
-    console.log("apa");
     for (let j = 0; j < response.length; j++ ) {
-        console.log("apap");
         for (let i = 0; i < response[j].length; i++) {
-            console.log("apapa");
-            var a = document.getElementById("dropdown"+current_id); //or grab it by tagname etc
+            var a = document.getElementById("dropdown"+current_id);
             if (j == 0){
                 a.href = "/product/"+response[j][i]['id'];
-                //a.href = "{{url_for('shop.product',id="+current_id+")}}";
             } else {
                 a.href = "/categories/"+response[j][i]['id'];
             }
@@ -57,6 +51,51 @@ function addHref(response,id){
         }
     }
 }
+
+function sortASC(category){
+    $.ajax({
+        type: 'POST',
+        url: "/sort",
+        data: {
+            type : "ASC",
+            category : category
+        },
+        dataType: "json",
+        success: function(response) {
+            
+        }
+    });
+};
+
+function sortDESC(category){
+    $.ajax({
+        type: 'POST',
+        url: "/sort",
+        data: {
+            type : "DESC",
+            category : category
+        },
+        dataType: "json",
+        success: function(response) {
+            
+        }
+    });
+};
+
+function sortPOP(category){
+    $.ajax({
+        type: 'POST',
+        url: "/sort",
+        data: {
+            type : "POP",
+            category : category
+        },
+        dataType: "json",
+        success: function(response) {
+            
+        }
+    });
+};
 
 var slideIndex = 1;
 
