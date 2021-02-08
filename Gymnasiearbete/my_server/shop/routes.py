@@ -39,11 +39,23 @@ def search(search = ''):
     #borde fungera
     if request.method == 'POST':
         search = request.form['parameter']
-        if search == "": 
-            return json.dumps("empty")
+        if search == '': 
+            return json.dumps('empty')
         products = Product.query.filter(Product.name.like('%'+search+'%')).all()
         categories = Category.query.filter(Category.name.like('%'+search+'%')).all()
         return json.dumps((sql_to_list(products),sql_to_list(categories)))
     else:
         session['search_data']=Product.query.filter(Product.name.like('%'+search+'%')).all()
         return redirect(url_for('shop.products'))
+
+@shop.route('/sort', methods = ['POST'])
+def sort_search(category=0,order=''):
+    search = request.form['serach']
+    if search != '':
+        if order == 'ASC':
+            products = Product.query.filter(Product.category.like(category)).order_by(Product.price.asc()).all()
+            return json.dumps(sql_to_list(products))
+        elif order == 'DESC':
+            products = Product.query.filter(Product.category.like(category)).order_by(Product.price.dsc()).all()
+            return json.dumps(sql_to_list(products))
+    return json.dumps('Fel vid sortering, kontrollera inmatning')
