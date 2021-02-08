@@ -11,3 +11,14 @@
     <input type="submit" name="sök" value="search" />
 </form>
 {% endblock%}
+
+{%block left%}
+<div class="dropdown horizontal-center" style="margin-top: 1vh;">
+    <button class="btn dropdown-toggle color-darkernight horizontal-center" type="button" data-toggle="dropdown" style="color: gray; width: 70%;">Sortera<span class="caret"></span></button>
+    <div class="dropdown-menu" style="width: 70%;">
+        <a class="dropdown-item" href="#" onclick="sortPOP({{'products[0].category'}})">Popularitet</a>
+        <a class="dropdown-item" href="#" onclick="sortDESC({{'products[0].category'}})">Högsta pris</a>
+        <a class="dropdown-item" href="#" onclick="sortASC({{'products[0].category'}})">Lägsta pris</a>
+    </div>
+</div>
+{%endblock%}
