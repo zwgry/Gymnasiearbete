@@ -1,4 +1,4 @@
-from flask import redirect, url_for, session, request, Blueprint
+from flask import redirect, url_for, session, request, Blueprint, make_response
 from flask import render_template as rt
 from my_server.shop.utils import sql_request, sql_request_prepared, sql_to_list
 from my_server.models import Category, Product, Picture
@@ -63,3 +63,10 @@ def sort_search(category=0,order=''):
             products = Product.query.filter(Product.category.like(category)).order_by(Product.price.desc()).all()
             return json.dumps(sql_to_list(products))
     return json.dumps('Fel vid sortering, kontrollera inmatning')
+
+@shop.route('/cookie')
+def set_cart_cookie():
+    #product_id = request.form['product_id']
+    resp = make_response('Making shoping cart cookie')
+    resp.set_cookie('test','test2',max_age=60*60*24*7)
+    return resp
