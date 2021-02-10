@@ -1,10 +1,9 @@
 {% extends 'base.html' %}
 
 {%block content%}
-{% for product in products %}
-<h1>{{product.name}}</h1>
-{% endfor %}
+<div id="test"></div>
 
+<div class="row"></div>
 
 <form action="{{url_for('shop.search')}}" method="post">
     <input type="text" name = "search" />
@@ -14,11 +13,11 @@
 
 {%block left%}
 <div class="dropdown horizontal-center" style="margin-top: 1vh;">
-    <button class="btn dropdown-toggle color-darkernight horizontal-center" type="button" data-toggle="dropdown" style="color: gray; width: 70%;">Sortera<span class="caret"></span></button>
-    <div class="dropdown-menu" style="width: 70%;">
-        <a class="dropdown-item" href="#" onclick="sortPOP({{'products[0].category'}})">Popularitet</a>
-        <a class="dropdown-item" href="#" onclick="sortDESC({{'products[0].category'}})">Högsta pris</a>
-        <a class="dropdown-item" href="#" onclick="sortASC({{'products[0].category'}})">Lägsta pris</a>
+    <button class="btn dropdown-toggle color-darkernight horizontal-center" type="button" data-toggle="dropdown" style="color: gray; width: 75%;">Sortera<span class="caret"></span></button>
+    <div class="dropdown-menu" style="width: 75%;">
+        <a class="dropdown-item" onclick="sortPOP({{products[0].category}})">Popularitet</a>
+        <a class="dropdown-item" onclick="sortDSC({{products[0].category}})">Högsta pris</a>
+        <a class="dropdown-item" onclick="sortASC({{products[0].category}})">Lägsta pris</a>
     </div>
 </div>
 {%endblock%}

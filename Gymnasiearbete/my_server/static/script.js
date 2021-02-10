@@ -42,7 +42,7 @@ function addHref(response,id){
             if (j == 0){
                 a.href = "/product/"+response[j][i]['id'];
             } else {
-                a.href = "/categories/"+response[j][i]['id'];
+                a.href = "/products/"+response[j][i]['id'];
             }
             current_id++;
             if (current_id > id){
@@ -57,27 +57,39 @@ function sortASC(category){
         type: 'POST',
         url: "/sort",
         data: {
-            type : "ASC",
-            category : category
+            category : category,
+            order : "ASC"
         },
         dataType: "json",
         success: function(response) {
-            
+            console.log(response)
+            let s = "";
+            let id = 1;
+            for (let i = 0; i < response.length; i++) {
+                s += "<h1>"+response[i]['name']+"</h1>";
+            }
+            $("#test").html(s);
         }
     });
 };
 
-function sortDESC(category){
+function sortDSC(category){
     $.ajax({
         type: 'POST',
         url: "/sort",
         data: {
-            type : "DESC",
-            category : category
+            category : category,
+            order : "DSC"
         },
         dataType: "json",
         success: function(response) {
-            
+            console.log(response)
+            let s = "";
+            let id = 1;
+            for (let i = 0; i < response.length; i++) {
+                s += "<h1>"+response[i]['name']+"</h1>";
+            }
+            $("#test").html(s);
         }
     });
 };
@@ -87,8 +99,8 @@ function sortPOP(category){
         type: 'POST',
         url: "/sort",
         data: {
-            type : "POP",
-            category : category
+            category : category,
+            order : "POP"
         },
         dataType: "json",
         success: function(response) {
