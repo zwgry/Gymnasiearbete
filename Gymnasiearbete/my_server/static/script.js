@@ -66,7 +66,7 @@ function sortASC(category){
             let s = "";
             let id = 1;
             for (let i = 0; i < response.length; i++) {
-                s += "<h1>response[i][name]</h1>";
+                s += "<h1>"+response[i]['name']+"</h1>";
             }
             $("#test").html(s);
         }
@@ -87,7 +87,7 @@ function sortDSC(category){
             let s = "";
             let id = 1;
             for (let i = 0; i < response.length; i++) {
-                s += "<h1>response[i][name]</h1>";
+                s += "<h1>"+response[i]['name']+"</h1>";
             }
             $("#test").html(s);
         }
