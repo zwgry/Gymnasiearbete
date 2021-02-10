@@ -5,7 +5,7 @@
         <div class="slideshow-container">
             {% for picture in pictures %}
                 <div class="mySlides vertical-center">
-                    <img src="/{{picture[0]}}" alt="{{picture[0]}}" width="80%">
+                    <img src="{{picture.filepath}}" alt="{{picture[0]}}" width="80%">
                 </div>
             {%endfor%}
 

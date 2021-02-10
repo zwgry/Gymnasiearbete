@@ -10,11 +10,14 @@ shop = Blueprint('shop',__name__)
 @shop.route('/categories')
 @shop.route('/categories/')
 @shop.route('/categories/<id>')
-def categories(id = 1):
-    return rt('categories.html', categories=Category.query.filter_by(id=id).all())
+def categories(id = 0):
+    if id == 0:
+        categories = Category.query.filter_by(id=None).all()
+    else:
+        categories = Category.query.filter_by(id=id).all()
+    return rt('categories.html', categories=categories)
 
 @shop.route('/products')
-@shop.route('/products/')
 @shop.route('/products/<category>')
 def products(category=0):
     if 'search_data' in session:
@@ -50,12 +53,13 @@ def search(search = ''):
 
 @shop.route('/sort', methods = ['POST'])
 def sort_search(category=0,order=''):
-    search = request.form['serach']
+    category = request.form['category']
+    order = request.form['order']
     if search != '':
         if order == 'ASC':
             products = Product.query.filter(Product.category.like(category)).order_by(Product.price.asc()).all()
             return json.dumps(sql_to_list(products))
-        elif order == 'DESC':
-            products = Product.query.filter(Product.category.like(category)).order_by(Product.price.dsc()).all()
+        elif order == 'DSC':
+            products = Product.query.filter(Product.category.like(category)).order_by(Product.price.desc()).all()
             return json.dumps(sql_to_list(products))
     return json.dumps('Fel vid sortering, kontrollera inmatning')
