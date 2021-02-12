@@ -52,59 +52,24 @@ function addHref(response,id){
     }
 }
 
-function sortASC(category){
+function sort(category, order){
     $.ajax({
         type: 'POST',
         url: "/sort",
         data: {
             category : category,
-            order : "ASC"
+            order : order
         },
         dataType: "json",
         success: function(response) {
-            console.log(response)
             let s = "";
+            let h="";
             let id = 1;
             for (let i = 0; i < response.length; i++) {
                 s += "<h1>"+response[i]['name']+"</h1>";
+                h += "<div class='row product'></div>";
             }
             $("#test").html(s);
-        }
-    });
-};
-
-function sortDSC(category){
-    $.ajax({
-        type: 'POST',
-        url: "/sort",
-        data: {
-            category : category,
-            order : "DSC"
-        },
-        dataType: "json",
-        success: function(response) {
-            console.log(response)
-            let s = "";
-            let id = 1;
-            for (let i = 0; i < response.length; i++) {
-                s += "<h1>"+response[i]['name']+"</h1>";
-            }
-            $("#test").html(s);
-        }
-    });
-};
-
-function sortPOP(category){
-    $.ajax({
-        type: 'POST',
-        url: "/sort",
-        data: {
-            category : category,
-            order : "POP"
-        },
-        dataType: "json",
-        success: function(response) {
-            
         }
     });
 };
