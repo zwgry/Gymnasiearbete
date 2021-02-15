@@ -3,11 +3,11 @@ var week = 1000*60*60*24*7;
 
 function startCookie(accepted){
   //Promt the user to accept cookies
-  createCookie("bag",'[["1","3"],["2","4"]]',week);
+  createCookie("bag",[[1,3],[2,4]],week);
   if (accepted){
     currentCookie = JSON.parse(getCookie("bag"));
       if (currentCookie!=null){
-        var shoppingBag = getProducts(currentCookie);
+        //var shoppingBag = getProducts(currentCookie);
         //displayProducts(shoppingBag);
       } else {
         createCookie("bag",'[]',week);
@@ -16,9 +16,8 @@ function startCookie(accepted){
   } else{
     window.location.replace("https://www.google.com/");
   }
-  let jsonProducts = getCookie("bag");
-  let products = JSON.parse(jsonProducts);
-  addProductToCookie("bag","test",2);
+  //addProductToCookie("bag",3,2);
+  getProducts(currentCookie);
 }
 
 function getCookie(cname){
@@ -39,26 +38,32 @@ function getCookie(cname){
 
 //Ajax till servern
 function getProducts(cookie){
-  //AJAX query
-  //return products
+  $.ajax({
+    type: 'POST',
+    url: "/cookie_products",
+    data: {
+        "cookie" : cookie
+    },
+    contentType:"text",
+    dataType: "json",
+    success: function(response) {
+        console.log(response);
+    }
+  });
+  console.log("response1");
 }
 
-function addProductToCookie(cookie,product,ammount){
-  if (currentCookie == []) {
-    currentCookie = [[product,ammount]];
-    createCookie("bag",currentCookie,week);
-  } else {
-    var tempCookie = [];
-    for (let i = 0; i < currentCookie.length; i++) {
-      console.log(currentCookie[i]);
-      
-    }
-  }
+function addProductToCookie(type,product,ammount){
+    currentCookie.push([product,ammount]);
+    //console.log(currentCookie);
+    createCookie(type,currentCookie,week);
 }
+
+
 
 function createCookie(type,value,time){
   var d = new Date();
   d.setTime(d.getTime() + time);
   var expires = "expires="+d.toUTCString();
-  document.cookie = type+"="+value+";"+expires+";path=/; Secure";  
+  document.cookie = type+"="+JSON.stringify(value)+";"+expires+";path=/; Secure";  
 }
