@@ -42,6 +42,14 @@
     color: #BFBFBF;
 }
 
+.color-product {
+    color: #1a1717;
+}
+
+.color-product:hover {
+    color: #F2505D;
+}
+
 .search-text-overflow {
     overflow: hidden;
     text-overflow: ellipsis;
@@ -120,22 +128,18 @@
 }
 
 .product {
+    position: relative;
     width: 200px;
     height: 200px;
-    background-color: wheat;
-    margin: auto;
+    background-color: white;
+    margin: 0 auto;
 }
 
 .mar5 {
     margin: 5px;
 }
 
-.product_container .product{
-    position: absolute;
-    bottom: 0;
-    background: rgb(0, 0, 0); /* Fallback color */
-    background: rgba(0, 0, 0, 0.5); /* Black background with 0.5 opacity */
-    color: #f1f1f1;
-    width: 100%;
-    padding: 20px;
+.img_center {
+    display: flex;
+    margin-left: 10%;
 }

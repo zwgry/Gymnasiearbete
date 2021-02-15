@@ -62,14 +62,16 @@ function sort(category, order){
         },
         dataType: "json",
         success: function(response) {
+            console.log(response);
             let s = "";
             let h="";
             let id = 1;
             for (let i = 0; i < response.length; i++) {
                 s += "<h1>"+response[i]['name']+"</h1>";
-                h += "<div class='row product'></div>";
+                h += "<div class='col mar5'><a href='#' class='color-product' style='text-decoration: none;'><div class='product'><img class='vertical-center img_center' src="+response[i].pictures[i].filepath+" alt='' width='80%'></div><h3>"+response[i].name+"</h3></a></div>";
             }
             $("#test").html(s);
+            $("#products").html(h);
         }
     });
 };
