@@ -21,7 +21,7 @@ class Picture(db.Model):
     filepath = db.Column(db.String(20), nullable=False, default='default.jpg')
 
     def __repr__(self):
-        return f"Product('{self.id}','{self.product_id}')"
+        return f"Picture('{self.id}','{self.product_id}')"
 
 class Category(db.Model):
     id = db.Column(db.Integer, primary_key=True)

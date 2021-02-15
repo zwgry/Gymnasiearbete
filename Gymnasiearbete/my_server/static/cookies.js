@@ -1,20 +1,28 @@
-function runCookie(){
-    setCookie("bag",'{"1":2,"3":1}',1000*60*5)
-    //document.cookie = "username=Apa;expires=Fri, 12 Feb 2021 15:21:23 GMT;SameSite=Strict"; 
-    //document.cookie = 'bag={"1":2,"3":1};expires=Fri, 12 Feb 2021 15:21:23 GMT;SameSite=Strict'; 
-    //Promt the user to accept cookies
-    //if  (true){
-        // set and get cookies
-    //} else{
-        //redirect to google.com
-    //}
-    let jsonProducts = getCookie("bag");
-    console.log(jsonProducts)
-    let products = JSON.parse(jsonProducts);
+var currentCookie;
+var week = 1000*60*60*24*7;
+
+function startCookie(accepted){
+  //Promt the user to accept cookies
+  createCookie("bag",'[["1","3"],["2","4"]]',week);
+  if (accepted){
+    currentCookie = JSON.parse(getCookie("bag"));
+      if (currentCookie!=null){
+        var shoppingBag = getProducts(currentCookie);
+        //displayProducts(shoppingBag);
+      } else {
+        createCookie("bag",'[]',week);
+        currentCookie = [];
+      }
+  } else{
+    window.location.replace("https://www.google.com/");
+  }
+  let jsonProducts = getCookie("bag");
+  let products = JSON.parse(jsonProducts);
+  addProductToCookie("bag","test",2);
 }
 
 function getCookie(cname){
-    var name = cname + "=";
+  var name = cname + "=";
   var decodedCookie = decodeURIComponent(document.cookie);
   var ca = decodedCookie.split(';');
   for(var i = 0; i <ca.length; i++) {
@@ -26,14 +34,31 @@ function getCookie(cname){
       return c.substring(name.length, c.length);
     }
   }
-  return "";
+  return null;
 }
 
-//Ajax funktion som hämtar alla produkter
+//Ajax till servern
+function getProducts(cookie){
+  //AJAX query
+  //return products
+}
 
-function setCookie(type,value,time){
-    var d = new Date();
-    d.setTime(d.getTime() + time);
-    var expires = "expires="+d.toUTCString();
-    document.cookie = type+"="+value+";"+expires+";SameSite=Strict";    
+function addProductToCookie(cookie,product,ammount){
+  if (currentCookie == []) {
+    currentCookie = [[product,ammount]];
+    createCookie("bag",currentCookie,week);
+  } else {
+    var tempCookie = [];
+    for (let i = 0; i < currentCookie.length; i++) {
+      console.log(currentCookie[i]);
+      
+    }
+  }
+}
+
+function createCookie(type,value,time){
+  var d = new Date();
+  d.setTime(d.getTime() + time);
+  var expires = "expires="+d.toUTCString();
+  document.cookie = type+"="+value+";"+expires+";path=/; Secure";  
 }
