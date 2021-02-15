@@ -23,6 +23,9 @@ class Picture(db.Model):
     def __repr__(self):
         return f"Picture('{self.id}','{self.product_id}')"
 
+    def as_dict(self):
+        return {p.name: getattr(self, p.name) for p in self.__table__.columns}
+
 class Category(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(120), unique=True, nullable=False)
