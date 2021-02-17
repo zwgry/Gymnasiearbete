@@ -135,6 +135,10 @@
     margin: 0 auto;
 }
 
+.product img{
+    width: 80%;
+}
+
 .mar5 {
     margin: 5px;
 }
