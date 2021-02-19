@@ -2,6 +2,7 @@ from flask import redirect, url_for, session, request, Blueprint, make_response
 from flask import render_template as rt
 from my_server.shop.utils import sql_request, sql_request_prepared, sql_to_list
 from my_server.models import Category, Product, Picture
+from my_server import db
 import json
 
 shop = Blueprint('shop',__name__)
@@ -58,11 +59,11 @@ def sort_search(category=0,order=''):
     if search != '':
         if order == 'ASC':
             products = Product.query.filter(Product.category.like(category)).order_by(Product.price.asc()).all()
-            pictures = Picture.query.all()
+            pictures = Picture.query.group_by(Picture.product_id).all()
             return json.dumps((sql_to_list(products),sql_to_list(pictures)))
         elif order == 'DSC':
             products = Product.query.filter(Product.category.like(category)).order_by(Product.price.desc()).all()
-            pictures = Picture.query.all()
+            pictures = Picture.query.group_by(Picture.product_id).all()
             return json.dumps((sql_to_list(products),sql_to_list(pictures)))
     return json.dumps('Fel vid sortering, kontrollera inmatning')
 
