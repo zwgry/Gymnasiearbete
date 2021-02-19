@@ -65,9 +65,13 @@ function sort(category, order){
             console.log(response);
             let h="";
             for (let i = 0; i < response[0].length; i++) {
-                h += "<div class='col mar5'><a href='/product/"+response[0][i].id+"' class='color-product' style='text-decoration: none;'><div class='product'><img class='vertical-center img_center' src="+response[1][i].filepath+" alt=''></div><h3>"+response[0][i].name+"</h3></a></div>";
+                for ( var j = 0; j < response[1].length; j++) {
+                    if (response[1][j].product_id == response[0][i].id) {
+                        var picture = response[1][j];
+                    }
+                }
+                h += "<div class='col mar5'><a href='/product/"+response[0][i].id+"' class='color-product' style='text-decoration: none;'><div class='product'><img class='vertical-center img_center' src="+picture.filepath+" alt=''></div><h3>"+response[0][i].name+"</h3></a></div>";
             }
-            $("#test").html(s);
             $("#products").html(h);
         }
     });
