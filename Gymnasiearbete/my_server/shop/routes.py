@@ -59,12 +59,11 @@ def sort_search(category=0,order=''):
         if order == 'ASC':
             products = Product.query.filter(Product.category.like(category)).order_by(Product.price.asc()).all()
             pictures = Picture.query.all()
-            return json.dumps(sql_to_list(products),sql_to_list(pictures))
+            return json.dumps((sql_to_list(products),sql_to_list(pictures)))
         elif order == 'DSC':
             products = Product.query.filter(Product.category.like(category)).order_by(Product.price.desc()).all()
-            pictures = Picture.query.distinct().all()
-            print(pictures)
-            return json.dumps(sql_to_list(products),sql_to_list(pictures))
+            pictures = Picture.query.all()
+            return json.dumps((sql_to_list(products),sql_to_list(pictures)))
     return json.dumps('Fel vid sortering, kontrollera inmatning')
 
 @shop.route('/cookie_products/<cookie>', methods = ['POST','GET'])
