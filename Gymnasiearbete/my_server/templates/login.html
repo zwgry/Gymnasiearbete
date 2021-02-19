@@ -1,19 +1,19 @@
 {% extends 'base.html' %}
 
 {%block content%}
-<div class="container" style="margin-top: 1vh;">
+<div class="container mt-1vh">
     <form action="{{url_for('users.login')}}" method='post'>
         <div class="form-group">
-            <input type="name" class="form-control" name="username" placeholder="Användarnamn" style="width: auto; margin: auto;">
+            <input type="name" class="form-control forms" name="username" placeholder="Användarnamn">
         </div>
         <div class="form-group">
-            <input type="password" class="form-control" name="password" placeholder="Lösenord" style="width: auto; margin: auto;">
+            <input type="password" class="form-control forms" name="password" placeholder="Lösenord">
         </div>
-        <button type="submit" class="btn btn-primary">Logga in!</button>
+        <button type="submit" class="btn btn-cherry">Logga in!</button>
     </form>
     <div class="pt-3">
         <small class="text-muted">
-            Eller behöver du ett konto? <a href="{{url_for('users.register')}}" class="ml-2">Skapa ett konto!</a>
+            Eller behöver du ett konto? <a href="{{url_for('users.register')}}" class="ml-2 color-cherry">Skapa ett konto!</a>
         </small>
     </div>
 </div>
