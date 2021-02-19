@@ -1,3 +1,5 @@
+const { response } = require("express");
+
 var currentCookie;
 var week = 1000*60*60*24*7;
 
@@ -36,21 +38,17 @@ function getCookie(cname){
   return null;
 }
 
-//Ajax till servern
 function getProducts(cookie){
   $.ajax({
-    type: 'POST',
+    type: 'GET',
     url: "/cookie_products",
     data: {
-        "cookie" : cookie
+      "test":"hej",
     },
-    contentType:"text",
-    dataType: "json",
-    success: function(response) {
-        console.log(response);
-    }
-  });
-  console.log("response1");
+    dataType : "json",
+    success: (response) => {
+      console.log(response);
+    }});
 }
 
 function addProductToCookie(type,product,ammount){

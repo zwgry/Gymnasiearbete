@@ -62,16 +62,18 @@ def sort_search(category=0,order=''):
             return json.dumps(sql_to_list(products),sql_to_list(pictures))
         elif order == 'DSC':
             products = Product.query.filter(Product.category.like(category)).order_by(Product.price.desc()).all()
-            pictures = Picture.query.all()
+            pictures = Picture.query.distinct().all()
+            print(pictures)
             return json.dumps(sql_to_list(products),sql_to_list(pictures))
     return json.dumps('Fel vid sortering, kontrollera inmatning')
 
-@shop.route('/cookie_products', methods = ['POST','GET'])
+@shop.route('/cookie_products/<cookie>', methods = ['POST','GET'])
 def cookie_ajax(cookie = ''):
     if request.method == 'POST':
-        cookie = request.form['cookie']
-        if cookie == '':
-            return "apa"
+        print(request.data)
+        #cookie = request.form['test']
+        """if cookie == '':
+            return json.dumps("apa")
         ids = ()
         amounts = ()
         for product in cookie:
@@ -88,8 +90,7 @@ def cookie_ajax(cookie = ''):
             print(product)
             if product.id in ids:
                 print(product)
-                products_requested.add(sql_to_list(product))
-        return json.dumps("products_requested")
+                products_requested.add(sql_to_list(product))"""
     else:
-        print("apa")
-        return json.dumps("products_requested")
+        print(request.args['test'])
+    return json.dumps("products_requested")
