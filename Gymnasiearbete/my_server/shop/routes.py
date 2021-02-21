@@ -67,30 +67,30 @@ def sort_search(category=0,order=''):
             return json.dumps((sql_to_list(products),sql_to_list(pictures)))
     return json.dumps('Fel vid sortering, kontrollera inmatning')
 
-@shop.route('/cookie_products/<cookie>', methods = ['POST','GET'])
-def cookie_ajax(cookie = ''):
-    if request.method == 'POST':
-        print(request.data)
-        #cookie = request.form['test']
-        """if cookie == '':
-            return json.dumps("apa")
-        ids = ()
-        amounts = ()
-        for product in cookie:
-            if product[0] in ids:
-                for i in range(len(ids)):
-                    if ids[i] == product[0]:
-                        amounts[i] += product[1]
-            else:
-                ids.add(product[0])
-                amounts.add(product[1])
-        products = Product.query.filter.all()
-        products_requested = ()
-        for product in products:
-            print(product)
-            if product.id in ids:
-                print(product)
-                products_requested.add(sql_to_list(product))"""
-    else:
-        print(request.args['test'])
-    return json.dumps("products_requested")
+@shop.route('/cookie_products')
+def cookie_ajax():
+    cookie = json.loads(request.args['data'])
+    if cookie == '':
+        return json.dumps("apa")
+    ids = []
+    amounts = []
+    for product in cookie:
+        print(product)
+        if product[0] in ids:
+            position = ids.index(product[0])
+            amounts[position] += product[1]
+        else:
+            ids.append(product[0])
+            amounts.append(product[1])
+    products = Product.query.all()
+    products_requested = []
+    for product in products:
+        if product.id in ids:
+            product_dict = product.as_dict()
+            print(product_dict)
+            #product_dict = product_dict['amount']='2'
+
+            products_requested.append(product_dict)
+            print()
+    print(json.dumps(products_requested))
+    return json.dumps(products_requested)

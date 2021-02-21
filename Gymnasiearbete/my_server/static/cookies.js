@@ -43,7 +43,7 @@ function getProducts(cookie){
     type: 'GET',
     url: "/cookie_products",
     data: {
-      "test":"hej",
+      data:JSON.stringify(cookie),
     },
     dataType : "json",
     success: (response) => {
