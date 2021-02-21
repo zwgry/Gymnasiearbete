@@ -181,3 +181,31 @@
 .mt-1vh {
     margin-top: 1vh;
 }
+
+.slideshow-container-start {
+    width: 80%;
+    height: 50vh;
+    position: relative;
+    margin: auto;
+    background-color: white;
+    margin-top: 1vh;
+    margin-bottom: 1vh;
+}
+
+.center {
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    width: 100%;
+}
+
+.mySlides2 {
+    display: none;
+}
+
+.mySlides2 img{
+    width: 70%;
+}

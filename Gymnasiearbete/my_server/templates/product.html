@@ -1,10 +1,15 @@
 {% extends 'base.html' %}
+
+{% block head %}
+    <script src="{{ url_for('static', filename='product_slideshow.js') }}"></script>
+{% endblock %}
+
 {%block content%}
 <div class="row">
     <div class="col-sm-6">
         <div class="slideshow-container">
             {% for picture in pictures %}
-                <div class="mySlides vertical-center">
+                <div class="mySlides center">
                     <img src="{{picture.filepath}}" alt="{{picture[0]}}">
                 </div>
             {%endfor%}
