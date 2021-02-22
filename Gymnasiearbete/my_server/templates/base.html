@@ -36,11 +36,35 @@
         </div>
         <div class="col-sm-2">
             <ul class="navbar-nav" style="float: right;">
-                <li class="nav-item">
-                    <a class="nav-link nav-color" href="{{url_for('users.login')}}"><i class="fa fa-user mr-1"></i></a> </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link nav-color" href="{{url_for('users.login')}}" data-toggle="dropdown"><i class="fa fa-user mr-1"></i></a>
+                    
+                    <div class="dropdown-menu dropdown-menu-right color-darkernight">
+                        <form class="px-4 py-3" action="{{url_for('users.login')}}" method='post'>
+                            <div class="form-group">
+                                <input type="name" class="form-control forms" name="username" placeholder="Användarnamn">
+                            </div>
+                            <div class="form-group">
+                                <input type="password" class="form-control forms" name="password" placeholder="Lösenord">
+                            </div>
+                            <button type="submit" class="btn btn-cherry">Logga in!</button>
+                            <div class="form-check">
+                                <input type="checkbox" class="form-check-input" id="dropdownCheck">
+                                <label class="form-check-label text-light" for="dropdownCheck">
+                                  Remember me
+                                </label>
+                              </div>
+                        </form>
+                        <div class="pt-3 text-center">
+                            <small class="text-light">
+                                Eller behöver du ett konto? <a href="{{url_for('users.register')}}" class="ml-2 color-cherry"><br>Skapa ett konto!</a>
+                            </small>
+                        </div>
+                    </div>
+
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link nav-color" href=""><i class="fa fa-shopping-cart"></i></a> </li>
+                    <a class="nav-link nav-color" href=""><i class="fa fa-shopping-cart"></i></a>
                 </li>
             </ul>
         </div>
