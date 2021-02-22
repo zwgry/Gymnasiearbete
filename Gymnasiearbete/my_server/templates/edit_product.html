@@ -8,14 +8,17 @@
         <h1>bild</h1>
     </div>
     <div class="col-sm-7">
-        <form action="{{url_for('admin.admin_edit', id=product.id)}}" method="POST">
+        <form action="{{url_for('admin.admin_edit')}}" method="POST">
             <div class="form-group">
                 <label for="name">Produktnamn</label>
                 <input type="name" class="form-control" name="name" value="{{product.name}}">
             </div>
             <div class="form-group">
+                <input type="hidden" name="name2" value="{{product.id}}">
+            </div>
+            <div class="form-group">
                 <label for="name">Beskrivning</label>
-                <textarea class="form-control" rows="10">{{product.description}}</textarea>
+                <textarea class="form-control" rows="10" name="description">{{product.description}}</textarea>
             </div>
             <div class="form-group">
                 <label for="name">Antal</label>
@@ -23,7 +26,7 @@
             </div>
             <div class="form-group">
                 <label for="name">Kateogri</label>
-                <input type="number" class="form-control" name="main_category" value="{{product.category}}" disabled>
+                <input type="text" class="form-control" name="main_category" value="{{product.category}}" disabled>
             </div>
             <button class="btn btn-outline-primary" type="submit">Spara</button>
         </form>            

@@ -10,17 +10,19 @@ admin = Blueprint('admin',__name__)
 def admin_home():
     return rt('admin.html',products = Product.query.all())
 
-@admin.route('/admin/edit/<id>', methods=['GET','POST'])
+@admin.route('/admin/edit/<id_>', methods=['GET','POST'])
+@admin.route('/admin/edit', methods=['POST'])
 @admin_required
-def admin_edit(id = None):
-    if id == None:
-        return redirect(url_for('admin.admin_home'))
+def admin_edit(id_ = None):
     if request.method ==  'POST':
-        name = 'a'
-        description = 'a'
-        stock = 1
-        #TODO: gör klart
-    product = Product.query.filter_by(id=id).first()
+        name = request.form['name']
+        description = request.form['description']
+        stock = request.form['stock']
+        id_ = request.form['name2']
+        print(name,description,stock,id_)
+    elif id_ == None:
+        return redirect(url_for('admin.admin_home'))
+    product = Product.query.filter_by(id=id_).first()
     return rt('edit_product.html',product = product)
 
 @admin.route('/admin/add')

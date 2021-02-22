@@ -75,7 +75,6 @@ def cookie_ajax():
     ids = []
     amounts = []
     for product in cookie:
-        print(product)
         if product[0] in ids:
             position = ids.index(product[0])
             amounts[position] += product[1]
@@ -87,10 +86,7 @@ def cookie_ajax():
     for product in products:
         if product.id in ids:
             product_dict = product.as_dict()
-            print(product_dict)
-            #product_dict = product_dict['amount']='2'
-
+            product_dict['stock']=amounts[ids.index(product.id)]
             products_requested.append(product_dict)
-            print()
     print(json.dumps(products_requested))
     return json.dumps(products_requested)
