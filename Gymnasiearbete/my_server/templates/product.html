@@ -26,6 +26,12 @@
     </div>
     <div class="col-sm-6">
         <h1 style="color: honeydew;">{{product.name}}</h1>
+        <div class="input-group">
+            <input type="number" class="form-control" name="amount" value="1" min="1" max="{{product.stock}}">
+            <div class="input-group-append">
+                <button class="btn btn-cherry" onclick="addProductToCookie('bag', {{product.id}}, 1)"><a class="color-white"><i class="fa fa-plus-square"></i></a></button>
+            </div>
+        </div>
     </div>
     <div class="col">
         <h3 style="color: honeydew;">{{product.description}}</h3>

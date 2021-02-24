@@ -18,6 +18,10 @@
     float: right;
 }
 
+.color-white, .color-white:hover {
+    color: white;
+}
+
 .btn-cherry {
     background-color: #F2505D !important;
     color: white !important;

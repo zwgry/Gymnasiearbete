@@ -8,6 +8,7 @@ function startCookie(accepted){
   createCookie("bag",[[1,3],[2,4]],week);
   if (accepted){
     currentCookie = JSON.parse(getCookie("bag"));
+    console.log(currentCookie);
       if (currentCookie!=null){
         //var shoppingBag = getProducts(currentCookie);
         //displayProducts(shoppingBag);
