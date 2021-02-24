@@ -11,6 +11,7 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
     <script src="..{{ url_for('static', filename='script.js') }}"></script>
+    {% block head %}{% endblock %}
 </head>
 <body class="d-flex flex-column min-vh-100 bg-secondary">
 
