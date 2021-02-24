@@ -6,8 +6,11 @@ var week = 1000*60*60*24*7;
 function startCookie(accepted){
   //Promt the user to accept cookies
   createCookie("bag",[[1,3],[2,4]],week);
+  console.log(currentCookie);
+  console.log(getCookie("bag"));
   if (accepted){
     currentCookie = JSON.parse(getCookie("bag"));
+    console.log(currentCookie);
       if (currentCookie!=null){
         //var shoppingBag = getProducts(currentCookie);
         //displayProducts(shoppingBag);
