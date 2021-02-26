@@ -21,7 +21,7 @@ function startCookie(accepted){
   } else{
     window.location.replace("https://www.google.com/");
   }
-  //addProductToCookie("bag",3,2);
+  addProductToCookie("bag",1,2);
   getProducts(currentCookie);
 }
 
