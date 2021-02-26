@@ -2,7 +2,7 @@ from my_server import db
 
 class Product(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(120), unique=True, nullable=False)
+    name = db.Column(db.String(120), nullable=False)
     description = db.Column(db.Text, nullable=False)
     stock = db.Column(db.Integer, nullable=False)
     category = db.Column(db.Integer, db.ForeignKey('category.id'), nullable=False)
@@ -45,6 +45,8 @@ class User(db.Model):
     email = db.Column(db.String(80), unique=True, nullable=False) 
     password = db.Column(db.String(60), nullable=False)
     admin = db.Column(db.Boolean, default=False, nullable=False)
+    confirmed = db.Column(db.Boolean, default=False, nullable=False)
+    confirmed_on = db.Column(db.DateTime, nullable=True)
 
     def __repr__(self):
         return f"User('{self.username}', '{self.email}')"
