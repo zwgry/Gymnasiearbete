@@ -213,3 +213,20 @@
 .mySlides2 img{
     width: 70%;
 }
+
+.amount-product {
+    margin: auto;
+    margin-top: 35vh;
+    width: 75% !important;
+}
+
+.cookie-confirmation {
+    display: inline-block;
+    padding: 4rem 2rem;
+    position: fixed;
+    bottom: 0;
+}
+
+.footer-bottom {
+    margin-bottom: 0 !important;
+}
