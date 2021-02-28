@@ -1,25 +1,16 @@
-from my_server.databasehandler import create_connection
 from flask import redirect, url_for, session, flash
 from functools import wraps
+from my_server import mail
+from flask_mail import Message
 
-#utför en sql request och hämtar samtliga resultat, inte skyddad från sql-injektioner!!! ska inte användas av användare
-# sql == sql query
-def sql_request(sql):
-    conn = create_connection()
-    cur = conn.cursor()
-    cur.execute(sql)
-    result = cur.fetchall()
-    conn.close()
-    return result
-
-# utför en sql request som skapar en till användare i tabellen users
-# user = användaren som ska skapas
-def insert_user(user):
-    conn = create_connection()
-    cur = conn.cursor()
-    cur.execute('INSERT INTO users (name,username,email,password,admin) VALUES (?,?,?,?,?)',user)
-    conn.commit()
-    conn.close()
+def send_email(user):
+    token = user.get_verification_token()
+    msg = Message('Verifikationsmail',
+                  sender='noreply@demo.com',
+                  recipients=[user.email])
+    msg.body = f'''För att bekräfta din mail klicka på länken nedan:
+{url_for('users.confirm_token', token=token, _external=True)}'''
+    mail.send(msg)
 
 # kollar om användaren är inloggad
 def login_required(f):

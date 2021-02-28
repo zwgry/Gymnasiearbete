@@ -1,4 +1,5 @@
-from my_server import db
+from itsdangerous import TimedJSONWebSignatureSerializer as Serializer
+from my_server import db, app
 
 class Product(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -41,12 +42,24 @@ class Category(db.Model):
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(120), unique=True, nullable=False)
-    name = db.Column(db.String(60), unique=True, nullable=False)
+    name = db.Column(db.String(60), nullable=False)
     email = db.Column(db.String(80), unique=True, nullable=False) 
     password = db.Column(db.String(60), nullable=False)
     admin = db.Column(db.Boolean, default=False, nullable=False)
     confirmed = db.Column(db.Boolean, default=False, nullable=False)
-    confirmed_on = db.Column(db.DateTime, nullable=True)
+
+    def get_verification_token(self, expires_sec=1800):
+        s = Serializer(app.config['SECRET_KEY'], expires_sec)
+        return s.dumps({'user_id': self.id}).decode('utf-8')
+
+    @staticmethod
+    def verify_verification_token(token):
+        s = Serializer(app.config['SECRET_KEY'])
+        try:
+            user_id = s.loads(token)['user_id']
+        except:
+            return None
+        return User.query.get(user_id)
 
     def __repr__(self):
         return f"User('{self.username}', '{self.email}')"

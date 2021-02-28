@@ -1,11 +1,9 @@
 from flask import redirect, url_for, request, flash, session, Blueprint
 from flask import render_template as rt
-from my_server.users.utils import no_login, login_required, sql_request, insert_user
+from my_server.users.utils import no_login, login_required,send_email
 from my_server import db
 from my_server.models import User
-from my_server.token import generate_confirmation_token, confirm_token
 import datetime
-from my_server.email import send_email
 import bcrypt
 
 users = Blueprint('users',__name__)
@@ -27,7 +25,6 @@ def login():
         flash('användarnamnet eller lösenordet är felaktigt','warning')
     return rt('login.html')
 
-#Klar?
 @users.route('/logout')
 @login_required
 def logout():
@@ -36,6 +33,7 @@ def logout():
     return redirect(url_for('main.start'))
 
 @users.route('/register', methods=['GET','POST'])
+@no_login
 def register():
     if request.method == 'POST':
         f_name = request.form['fname']
@@ -57,35 +55,29 @@ def register():
             new_user = User(username=username,name=f_name+' '+l_name,email=email,password=hashed_password)
             db.session.add(new_user)
             db.session.commit()
-
-
-            token = generate_confirmation_token(new_user.email)
-            confirm_url = url_for('users.confirm_email', token=token, _external=True)
-            html = rt('email/confirm.html', confirm_url=confirm_url)
-            subject = "Please confirm your email"
-            send_email(new_user.email, subject, html)
+            send_email(new_user)
             flash('användare skapad, vi har skickat ett bekräftelsemail till din mailadress','success')
             return redirect(url_for('users.login'))
     else:
         return rt('sign_up.html')
 
 
-@users.route('/confirm/<token>')
+
+@users.route("/reset_password/<token>", methods=['GET', 'POST'])
 @login_required
-def confirm_email(token):
-    try:
-        email = confirm_token(token)
-    except:
-        flash('The confirmation link is invalid or has expired.', 'danger')
-    user = User.query.filter_by(email=email).first_or_404()
-    if user.confirmed:
-        flash('Account already confirmed. Please login.', 'success')
+def confirm_token(token):
+    current_user = User.query.filter_by(username=session['username']).first()
+    if current_user.confirmed:
+        flash('Du är redan verifierad','info')
+        return redirect(url_for('main.start'))
+    user = User.verify_verification_token(token)
+    if user is None:
+        flash('Felaktig eller gammal länk, försök igen', 'warning')
+        return redirect(url_for('main.start'))
     else:
-        users.confirmed = True
-        users.confirmed_on = datetime.datetime.now()
-        db.session.add(user)
+        user.confirmed = True
         db.session.commit()
-        flash('Din main är nu verifierad! Tack!', 'success')
+    flash('Du är nu verifierad!','success')
     return redirect(url_for('main.start'))
 
 
