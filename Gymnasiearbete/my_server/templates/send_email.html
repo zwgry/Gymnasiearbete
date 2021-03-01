@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block title %}Admin{% endblock %}
+
+{% block head %}{% endblock %}
+
+{%block content%}
+    <div class="container">
+        <form action="{{url_for('admin.send_email')}}" method='post'>
+            <div class="form-group">
+                <input type="name" class="form-control forms" name="subject" placeholder="Ämne">
+            </div>
+            <div class="form-group">
+                <textarea class="form-control" rows="10" name="content" placeholder="Inehåll"></textarea>
+            </div>
+            <div class="form-group" style="display: flex;">
+                <input type="checkbox" class="form-control forms" id="newsletter" name="newsletter" value="True">
+                <label for="newsletter">Nyhetsbrev</label>
+            </div>
+            <div class="form-group" style="display: flex;">
+                <input type="checkbox" class="form-control forms" id="general" name="general" value="True">
+                <label for="general">Generelt</label>
+            </div>
+            <button type="submit" class="btn btn-cherry">Skicka mail</button>
+        </form>
+    </div>
+{%endblock%}

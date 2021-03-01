@@ -3,6 +3,16 @@ from flask import redirect, url_for, flash, abort, session
 from my_server.databasehandler import create_connection
 from my_server.models import User
 from functools import wraps
+from my_server import mail
+from flask_mail import Message
+
+def send_newsletter(subject,content,recipients):
+    msg = Message(subject,
+                  sender='noreply@demo.com',
+                  recipients=recipients)
+    msg.body = content
+    mail.send(msg)
+
 
 # kollar om användaren är en admin
 def admin_required(f):
