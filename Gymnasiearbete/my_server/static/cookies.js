@@ -9,26 +9,14 @@ $(document).ready(function(){
 
 });
 
-function startCookie(accepted){
-  //Promt the user to accept cookies
-  createCookie("bag",[[1,3],[2,4]],week);
-  console.log(currentCookie);
-  console.log(getCookie("bag"));
-  if (accepted){
-    currentCookie = JSON.parse(getCookie("bag"));
-    console.log(currentCookie);
-      if (currentCookie!=null){
-        //var shoppingBag = getProducts(currentCookie);
-        //displayProducts(shoppingBag);
-      } else {
-        createCookie("bag",'[]',week);
-        currentCookie = [];
-      }
-  } else{
-    window.location.replace("https://www.google.com/");
+function startCookie(){
+  currentCookie = JSON.parse(getCookie("bag"));
+  if (currentCookie != null){
+    //Nånging fint med kundvagning
+  } else {
+    createCookie("bag",'[]',week);
+    currentCookie = [];
   }
-  addProductToCookie("bag",1,2);
-  getProducts(currentCookie);
 }
 
 function getCookie(cname){
