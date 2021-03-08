@@ -70,7 +70,7 @@ function sort(category, order){
                         var picture = response[1][j];
                     }
                 }
-                h += "<div class='col mar5'><a href='/product/"+response[0][i].id+"' class='color-product' style='text-decoration: none;'><div class='product'><img class='vertical-center img_center' src="+picture.filepath+" alt=''></div><h3>"+response[0][i].name+"</h3></a></div>";
+                h += "<div class='col mar5'><a href='/product/"+response[0][i].id+"' class='color-product' style='text-decoration: none;'><div class='product'><img class='vertical-center img_center' src=/"+picture.filepath+" alt=''></div><h3>"+response[0][i].name+"</h3></a></div>";
             }
             $("#products").html(h);
         }
