@@ -16,7 +16,7 @@ function searchFunction(input) {
             let id = 1;
             for (let j = 0; j < response.length; j++ ) {
                 for (let i = 0; i < response[j].length; i++) {
-                    s += "<a class='dropdown-item search-text-overflow' href='#' id='dropdown"+id+"'>" + response[j][i]['name'] + "</a>";
+                    s += "<a class='dropdown-item search-text-overflow' href='#' id='dropdown"+id+"'>" + response[j][i].name + "</a>";
                     id++;
                 }
                 if (j == 0) {
@@ -62,7 +62,6 @@ function sort(category, order){
         },
         dataType: "json",
         success: function(response) {
-            console.log(response);
             let h="";
             for (let i = 0; i < response[0].length; i++) {
                 for ( var j = 0; j < response[1].length; j++) {
