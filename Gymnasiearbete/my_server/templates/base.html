@@ -37,7 +37,7 @@
         <div class="col-sm-2">
             <ul class="navbar-nav" style="float: right;">
                 <li class="nav-item dropdown">
-                    <a class="nav-link nav-color" href="{{url_for('users.login')}}" data-toggle="dropdown"><i class="fa fa-user mr-1"></i></a>    
+                    <a class="nav-link nav-color" data-toggle="dropdown"><i class="fa fa-user mr-1"></i></a>    
                     <div class="dropdown-menu dropdown-menu-right color-darkernight">
                         <form class="px-4 py-3" action="{{url_for('users.login')}}" method='post'>
                             <div class="form-group">
@@ -62,7 +62,7 @@
                     </div>
                 </li>
                 <li class="nav-item dropdown">
-                    <a class="nav-link nav-color" href="{{url_for('users.login')}}" data-toggle="dropdown"><i class="fa fa-shopping-cart"></i></a>
+                    <a id="shopping-cart" class="nav-link nav-color" data-toggle="dropdown"><i class="fa fa-shopping-cart"></i></a>
                     <div class="dropdown-menu dropdown-menu-right color-darkernight">
                         
                     </div>
@@ -85,10 +85,10 @@
     <div class="col-sm-2 color-darknight">{%block right%}{%endblock%}</div>
 </div>
 
-<div class="container-fluid cookie-confirmation text-center color-darkernight">
+<div id="accept-cookie" class="container-fluid cookie-confirmation text-center color-darkernight">
     <div class="center">
         <p class="color-cherry">Vi använder oss av cookies!</p>
-        <button class="btn btn-cherry">Ok</button>
+        <button class="btn btn-cherry" onclick="acceptedCookies()">Ok</button>
     </div>
 </div>
 

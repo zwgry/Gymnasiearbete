@@ -1,7 +1,13 @@
-const { response } = require("express");
-
 var currentCookie;
 var week = 1000*60*60*24*7;
+
+$(document).ready(function(){
+
+  if (getCookie("acceptCookie") != "true") {
+    document.getElementById("accept-cookie").style.display = "block";
+  }
+
+});
 
 function startCookie(accepted){
   //Promt the user to accept cookies
@@ -67,4 +73,17 @@ function createCookie(type,value,time){
   d.setTime(d.getTime() + time);
   var expires = "expires="+d.toUTCString();
   document.cookie = type+"="+JSON.stringify(value)+";"+expires+";path=/; Secure";  
+}
+
+function acceptedCookies(){
+  createCookie("acceptCookie", true, week);
+  document.getElementById("accept-cookie").style.display = "none";
+}
+
+function shoppingCart(){
+  let h="";
+  for (let i = 0; i < response[0].length; i++) {
+      h += "";
+  }
+  $("#shopping-cart").html(h);
 }

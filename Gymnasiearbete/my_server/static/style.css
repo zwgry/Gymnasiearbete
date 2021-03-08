@@ -12,6 +12,7 @@
 
 .nav-color:hover {
     color: lightgray;
+    cursor: pointer;
 }
 
 .right {
@@ -229,4 +230,8 @@
 
 .footer-bottom {
     margin-bottom: 0 !important;
+}
+
+#accept-cookie {
+    display: none;
 }
