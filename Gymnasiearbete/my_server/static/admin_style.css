@@ -1,0 +1,16 @@
+.menu_container {
+    width: 60%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.item_container {
+    background-color:darkgray;
+    height: 12.5vh;
+    margin-top: 2vh;
+}
+
+.button {
+    float: right;
+    margin-right: 5vh;
+}

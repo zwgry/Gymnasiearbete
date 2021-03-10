@@ -2,14 +2,18 @@
 
 {% block title %}Admin{% endblock %}
 
+{% block head%}<link rel="stylesheet" type="text/css" href="..{{ url_for('static', filename='admin_style.css') }}">{% endblock %}
+
 {%block content%}
-    <ul>
+    <ul class="menu_container">
         {% for product in products %}
-        <a href="{{url_for('admin.admin_edit',product_id=product.id)}}">
-            <li>
-                {{product.name}}
-            </li>
-        </a>
+            <div class="item_container">
+                <h4>{{product.name}}</h4>
+
+                <a class="btn btn-outline-primary button" href="{{url_for('admin.admin_edit',product_id=product.id)}}" >
+                    Redigera
+                </a>
+            </div>
         {% endfor %}
     </ul>
 {% endblock%}
