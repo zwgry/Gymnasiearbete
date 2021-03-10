@@ -96,7 +96,7 @@
 }
 
 .mySlides img{
-    width: 80%;
+    width: auto;
 }
 
 .prev, .next {
@@ -166,7 +166,7 @@
 }
 
 .product img{
-    width: 80%;
+    width: 50%;
 }
 
 .mar5 {
@@ -212,7 +212,7 @@
 }
 
 .mySlides2 img{
-    width: 70%;
+    width: auto;
 }
 
 .amount-product {
@@ -234,4 +234,15 @@
 
 #accept-cookie {
     display: none;
+}
+
+.shopping-cart-width {
+    min-width: 20rem !important;
+    max-width: 20rem !important;
+}
+
+.shopping-cart-overflow {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space:nowrap;
 }
