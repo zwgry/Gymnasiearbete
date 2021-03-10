@@ -4,9 +4,11 @@ from flask_mail import Mail
 import os
 
 
+ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif'}
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = os.urandom(32)
+app.config['UPLOAD_FOLDER'] = 'my_server/static/images/'
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///site.db'
 app.config['SECURITY_PASSWORD_SALT'] = os.urandom(16)
 app.config['MAIL_SERVER'] = 'smtp.googlemail.com'

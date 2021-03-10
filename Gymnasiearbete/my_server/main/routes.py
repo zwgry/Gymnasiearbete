@@ -19,4 +19,5 @@ def start():
     for id in products_id:
         products.append(Product.query.filter_by(id=id).first())
         pictures.append(Picture.query.filter_by(product_id=id).first())
+        
     return rt('index.html',products=products,pictures=pictures)

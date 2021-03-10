@@ -2,7 +2,9 @@ from flask import redirect, url_for, request, Blueprint, flash
 from flask import render_template as rt
 from my_server.admin.utils import admin_required, send_newsletter
 from my_server.models import Product, Picture, Newsletter_Recipients, User
-from my_server import db
+from werkzeug.utils import secure_filename
+import os
+from my_server import db,app
 
 admin = Blueprint('admin',__name__)
 
@@ -34,7 +36,7 @@ def send_email():
     return rt('send_email.html')
 
 @admin.route('/admin/edit', methods=['GET','POST'])
-@admin_required
+#@admin_required
 def admin_edit():
     if request.method ==  'POST':
         name = request.form['name']
@@ -55,9 +57,25 @@ def admin_edit():
             return redirect(url_for('admin.admin_home'))
     product = Product.query.filter_by(id=product_id).first()
     
-    pictures =Picture.query.filter_by(product_id=product_id).all()
-    print(pictures)
+    pictures = Picture.query.filter_by(product_id=product_id).all()
     return rt('edit_product.html',product = product, pictures=pictures)
+
+@admin.route('/admin/edit/upload_picture', methods=['POST'])
+def upload_picture():
+    product_id = request.form['id']
+    file = request.files['file']
+    filename = secure_filename(file.filename)
+    filepath=os.path.join(app.config['UPLOAD_FOLDER'],filename)
+    file.save(filepath)
+    print(os.path.join(app.config['UPLOAD_FOLDER'],filename))
+
+
+    picture = Picture(product_id=product_id,filepath=f'static/images/{filename}')
+    db.session.add(picture)
+    db.session.commit()
+    return redirect(url_for('admin.admin_edit',product_id=product_id))
+
+
 
 @admin.route('/admin/add')
 @admin_required

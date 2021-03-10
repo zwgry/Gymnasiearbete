@@ -7,12 +7,16 @@
 {%block content%}
 <div class="row">
     <div class="col-sm-5">
-        <h1>bild</h1>
-        <form action="">
-            <label class="btn btn-outline-primary">
+        <img src="/{{pictures[0].filepath}}">
+        <form action="{{url_for('admin.upload_picture')}}" method="POST" enctype="multipart/form-data">
+            <!--<label class="btn btn-outline-primary">
                 Bläddra <input type="file" id="myfile" name="myfile"hidden>
-            </label>
+            </label>-->
+
+            <input type=file name=file>
             
+            <input type="hidden" name="id" value="{{product.id}}">
+
             <button class="btn btn-outline-primary" type="submit">Lägg till bild</button>
           </form>
     </div>

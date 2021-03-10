@@ -2,11 +2,9 @@ var currentCookie;
 var week = 1000*60*60*24*7;
 
 $(document).ready(function(){
-
   if (getCookie("acceptCookie") != "true") {
     document.getElementById("accept-cookie").style.display = "block";
   }
-
 });
 
 function startCookie(){
@@ -53,8 +51,6 @@ function addProductToCookie(type,product,ammount){
     //console.log(currentCookie);
     createCookie(type,currentCookie,week);
 }
-
-
 
 function createCookie(type,value,time){
   var d = new Date();
