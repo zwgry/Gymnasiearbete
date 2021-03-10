@@ -10,9 +10,9 @@
     <div class="row">
         <div class="col-sm-12">
             <div class="slideshow-container-start">
-                {% for start_pricture in start_pictures %}    
+                {% for picture in pictures %}    
                     <div class="mySlides2 center">
-                        <img src="../static/images/patrik shooting star.gif" alt="PATRIK STAR SHOTTER">
+                        <img src="/{{picture.filepath}}" alt="{{picture[0]}}">
                     </div>
                 {% endfor %}
                 <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
