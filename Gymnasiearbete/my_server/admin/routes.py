@@ -65,11 +65,7 @@ def upload_picture():
     product_id = request.form['id']
     file = request.files['file']
     filename = secure_filename(file.filename)
-    filepath=os.path.join(app.config['UPLOAD_FOLDER'],filename)
-    file.save(filepath)
-    print(os.path.join(app.config['UPLOAD_FOLDER'],filename))
-
-
+    file.save(os.path.join(app.config['UPLOAD_FOLDER'],filename))
     picture = Picture(product_id=product_id,filepath=f'static/images/{filename}')
     db.session.add(picture)
     db.session.commit()
