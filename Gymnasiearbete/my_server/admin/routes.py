@@ -1,7 +1,7 @@
 from flask import redirect, url_for, request, Blueprint, flash
 from flask import render_template as rt
 from my_server.admin.utils import admin_required, send_newsletter
-from my_server.models import Product, Picture, Newsletter_Recipients, User
+from my_server.models import Product, Picture, Newsletter_Recipients, User, Category
 from werkzeug.utils import secure_filename
 import os
 from my_server import db,app
@@ -9,9 +9,14 @@ from my_server import db,app
 admin = Blueprint('admin',__name__)
 
 @admin.route('/admin')
-@admin_required
+#@admin_required
 def admin_home():
-    return rt('admin.html',products = Product.query.all())
+    return rt('admin.html',categories = Category.query.filter(Category.name!='Main').all())
+
+@admin.route('/admin/category')
+def admin_category():
+    id = request.args['category_id']
+    return rt('admin_products.html',products=Product.query.filter_by(category=id).all())
 
 
 @admin.route('/admin/send_email', methods=['GET','POST'])

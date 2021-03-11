@@ -1,13 +1,21 @@
 .menu_container {
-    width: 60%;
+    width: 80%;
     margin-left: auto;
     margin-right: auto;
 }
 
-.item_container {
-    background-color:darkgray;
+.product_container {
+    background-color:gray;
+    height: 100%;
+    margin-top: 2vh;
+    width: 15vw;
+}
+
+.category_container {
+    background-color:gray;
     height: 12.5vh;
     margin-top: 2vh;
+    width: 15vw;
 }
 
 .button {

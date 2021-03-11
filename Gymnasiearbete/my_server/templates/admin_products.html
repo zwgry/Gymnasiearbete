@@ -6,11 +6,11 @@
 
 {%block content%}
     <div class="row menu_container">
-        {% for category in categories %}
+        {% for product in products %}
             <div class="col mar5">
-                <div class="category_container">
-                    <h3 class='color-product' >{{category.name}}</h3>
-                    <a href="{{ url_for('admin.admin_category', category_id = category.id) }}" class="btn btn-outline-primary">Visa</a>
+                <div class="product_container">
+                    <h3 class='color-product' >{{product.name}}</h3>
+                    <a href="{{ url_for('admin.admin_edit', product_id = product.id) }}" class="btn btn-outline-primary">Visa</a>
                 </div>            
             </div>
         {% endfor %}
