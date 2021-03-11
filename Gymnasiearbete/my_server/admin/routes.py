@@ -16,7 +16,7 @@ def admin_home():
 @admin.route('/admin/category')
 def admin_category():
     id = request.args['category_id']
-    return rt('admin_products.html',products=Product.query.filter_by(category=id).all())
+    return rt('admin_products.html',products=Product.query.filter_by(category=id).all(), category_name=Category.query.filter_by(id=id).first().name)
 
 
 @admin.route('/admin/send_email', methods=['GET','POST'])
