@@ -1,4 +1,3 @@
-from my_server.databasehandler import create_connection
 from flask import session
 
 def is_logged_in():

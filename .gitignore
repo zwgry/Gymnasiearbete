@@ -1,7 +1,7 @@
 .vscode/
-db_test.db
 workspace.code-workspace
 README.md
+requirements.txt
 Gymnasiearbete/my_server/__pycache__
 Gymnasiearbete/my_server/admin/__pycache__
 Gymnasiearbete/my_server/shop/__pycache__

@@ -1,6 +1,4 @@
-from my_server.databasehandler import create_connection
 from flask import redirect, url_for, flash, abort, session
-from my_server.databasehandler import create_connection
 from my_server.models import User
 from functools import wraps
 from my_server import mail
@@ -35,34 +33,3 @@ def admin_required(f):
             return abort(401)
     
     return wraped
-
-#utför en sql request och hämtar samtliga resultat, inte skyddad från sql-injektioner!!! ska inte användas av användare
-# sql == sql query
-def sql_request(sql):
-    conn = create_connection()
-    cur = conn.cursor()
-    cur.execute(sql)
-    result = cur.fetchall()
-    conn.close()
-    return result
-
-# utför en sql request och hämtar samtliga resultat, skyddad från sql-injektioner, kan använads av användare
-# sql == sql query
-# data = data som ska sökas efter (prepared statment)
-def sql_request_prepared(sql,data):
-    conn = create_connection()
-    cur = conn.cursor()
-    cur.execute(sql,data)
-    conn.commit()
-    result = cur.fetchall()
-    conn.close()
-    return result
-
-# utför en sql request som skapar en till användare i tabellen users
-# user = användaren som ska skapas
-def insert_user(user):
-    conn = create_connection()
-    cur = conn.cursor()
-    cur.execute('INSERT INTO users (name,username,email,password,admin) VALUES (?,?,?,?,?)',user)
-    conn.commit()
-    conn.close()
