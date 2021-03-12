@@ -25,6 +25,24 @@ def login():
         flash('användarnamnet eller lösenordet är felaktigt','warning')
     return rt('login.html')
 
+@users.route('/edit_profile', methods=['GET','POST'])
+@login_required
+def edit_user():
+    if request.method == 'POST':
+        username = request.form['username']
+        name = request.form['name']
+        email = request.form['email']
+        id = request.form['id']
+        user = User.query.filter_by(id=id).first()
+        user.username = username
+        user.name = name
+        user.email = email
+        db.session.commit()
+        return rt('edit_user.html', user = user)
+    user_id = request.args['id']
+    user = User.query.filter_by(id=user_id).first()
+    return rt('edit_user.html', user = user)
+
 @users.route('/logout')
 @login_required
 def logout():

@@ -9,11 +9,12 @@ from my_server import db,app
 admin = Blueprint('admin',__name__)
 
 @admin.route('/admin')
-#@admin_required
+@admin_required
 def admin_home():
     return rt('admin.html',categories = Category.query.filter(Category.name!='Main').all())
 
 @admin.route('/admin/category')
+@admin_required
 def admin_category():
     id = request.args['category_id']
     return rt('admin_products.html',products=Product.query.filter_by(category=id).all(), category_name=Category.query.filter_by(id=id).first().name)
@@ -41,7 +42,7 @@ def send_email():
     return rt('send_email.html')
 
 @admin.route('/admin/edit', methods=['GET','POST'])
-#@admin_required
+@admin_required
 def admin_edit():
     if request.method ==  'POST':
         name = request.form['name']
