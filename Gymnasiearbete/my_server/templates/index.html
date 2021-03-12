@@ -12,7 +12,7 @@
             <div class="slideshow-container-start">
                 {% for picture in pictures %}    
                     <div class="mySlides2 center">
-                        <img class="img-responsive" src="/{{picture.filepath}}" alt="{{picture[0]}}">
+                        <a href="{{url_for('shop.product', id=products[loop.index-1].id)}}"><img class="img-responsive" src="/{{picture.filepath}}" alt="{{picture[0]}}"></a>
                     </div>
                 {% endfor %}
                 <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
