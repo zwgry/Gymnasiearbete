@@ -21,7 +21,7 @@
         <div class="col-sm-2">
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="navbar-brand nav-color" href="{{url_for('main.start')}}">FÖRETAGSNAMN</a>
+                    <a class="navbar-brand nav-color" href="{{url_for('main.start')}}">buystuff.se</a>
                 </li>
             </ul>
         </div>
@@ -29,7 +29,7 @@
                 <ul class="navbar-nav justify-content-center">
                     <li class="nav-item dropdown" style="width: 75%;">
                         <input class="form-control" type="text"  onkeyup="searchFunction(this.value)" placeholder="Sök" data-toggle="dropdown">
-                        <div id="searchDropdownMenu" class="dropdown-menu" style="width: 100%;">
+                        <div id="searchDropdownMenu" class="dropdown-menu">
                         </div>
                     </li>
                 </ul>
@@ -64,13 +64,34 @@
                 <li class="nav-item dropdown">
                     <a id="shopping-cart" class="nav-link nav-color" data-toggle="dropdown"><i class="fa fa-shopping-cart"></i></a>
                     <div class="dropdown-menu dropdown-menu-right color-darkernight shopping-cart-width">
-                        <div class="px-4 py-3">
-                            <a href="#"><div class="row shopping-cart-width" style="height: 4vh;">
-                                <div class="col-sm-2" style="height: 100%;"><img src="/static/images/2217932_0.jpg" style="height: 100%"></div>
-                                <div class="col-sm-6 shopping-cart-overflow"><p>HEJ HEJ HEJ HEJ HEJ HEJ HEJ HEJ HEJ HEJ HEJ HEJ HEJ HEJ</p></div>
-                                <div class="col-sm-1"><p>4</p></div>
-                                <div class="col-sm-3"><p>40 kr</p></div>
-                            </div></a>
+                        <a href="#"><div class="shopping-cart-box color-cherry shopping-cart-link">
+                            <div class="shopping-cart-overflow shopping-cart-name"><p>HEJ HEJ HEJ HEJ HEJ HEJ HEJ HEJ HEJ HEJ HEJ HEJ HEJ HEJ HEJ HEJ HEJ HEJ HEJ HEJ HEJ HEJ HEJ HEJ HEJ HEJ HEJ HEJ HEJ HEJ</p></div>
+                            <div class="shopping-cart-amount"><p>4 st</p></div>
+                            <div class="shopping-cart-price"><p>10 040 kr</p></div>
+                        </div></a>
+                        <a href="#"><div class="shopping-cart-box color-cherry shopping-cart-link">
+                            <div class="shopping-cart-overflow shopping-cart-name"><p>HEJ HEJ HEJ HEJ HEJ HEJ HEJ HEJ HEJ HEJ HEJ HEJ HEJ HEJ HEJ HEJ HEJ HEJ HEJ HEJ HEJ HEJ HEJ HEJ HEJ HEJ HEJ HEJ HEJ HEJ</p></div>
+                            <div class="shopping-cart-amount"><p>4 st</p></div>
+                            <div class="shopping-cart-price"><p>10 040 kr</p></div>
+                        </div></a>
+                        <a href="#"><div class="shopping-cart-box color-cherry shopping-cart-link">
+                            <div class="shopping-cart-overflow shopping-cart-name"><p>HEJ HEJ HEJ HEJ HEJ HEJ HEJ HEJ HEJ HEJ HEJ HEJ HEJ HEJ HEJ HEJ HEJ HEJ HEJ HEJ HEJ HEJ HEJ HEJ HEJ HEJ HEJ HEJ HEJ HEJ</p></div>
+                            <div class="shopping-cart-amount"><p>4 st</p></div>
+                            <div class="shopping-cart-price"><p>10 040 kr</p></div>
+                        </div></a>
+                        <a href="#"><div class="shopping-cart-box color-cherry shopping-cart-link">
+                            <div class="shopping-cart-overflow shopping-cart-name"><p>HEJ HEJ HEJ HEJ HEJ HEJ HEJ HEJ HEJ HEJ HEJ HEJ HEJ HEJ HEJ HEJ HEJ HEJ HEJ HEJ HEJ HEJ HEJ HEJ HEJ HEJ HEJ HEJ HEJ HEJ</p></div>
+                            <div class="shopping-cart-amount"><p>4 st</p></div>
+                            <div class="shopping-cart-price"><p>10 040 kr</p></div>
+                        </div></a>
+                        <a href="#"><div class="shopping-cart-box color-cherry shopping-cart-link">
+                            <div class="shopping-cart-overflow shopping-cart-name"><p>HEJ HEJ HEJ HEJ HEJ HEJ HEJ HEJ HEJ HEJ HEJ HEJ HEJ HEJ HEJ HEJ HEJ HEJ HEJ HEJ HEJ HEJ HEJ HEJ HEJ HEJ HEJ HEJ HEJ HEJ</p></div>
+                            <div class="shopping-cart-amount"><p>4 st</p></div>
+                            <div class="shopping-cart-price"><p>10 040 kr</p></div>
+                        </div></a>
+                        <div class="shopping-cart-box color-cherry">
+                            <div style="float: left; width: 50%;"><p>Totalt: 99999999 kr</p></div>
+                            <div style="float: right; width: 50%;"><button type="submit" class="btn btn-cherry">Gå vidare!</button></div>
                         </div>
                     </div>
                 </li>
@@ -79,9 +100,9 @@
     </div>
 </nav>
 
-<div class="row flex-grow-1 shadow-bottom" style="margin-right: 0px;">
-    <div class="col-sm-2 color-darknight">{%block left%}{%endblock%}</div>
-    <div class="col-sm-8 color-nightgray" style="text-align: center;">
+<div class="row flex-grow-1" style="margin-right: 0px;">
+    <div class="col-sm-2 color-cherry-bg">{%block left%}{%endblock%}</div>
+    <div class="col-sm-8 color-darknight" style="text-align: center;">
         {%block content%}{% endblock%}
         <div style="width: 50%; margin-left: auto; margin-right: auto;">
             {% for category, message in get_flashed_messages(with_categories = True) %}
@@ -89,7 +110,7 @@
             {% endfor %}
         </div>
     </div>
-    <div class="col-sm-2 color-darknight">{%block right%}{%endblock%}</div>
+    <div class="col-sm-2 color-cherry-bg">{%block right%}{%endblock%}</div>
 </div>
 
 <div id="accept-cookie" class="container-fluid cookie-confirmation text-center color-darkernight">
