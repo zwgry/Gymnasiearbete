@@ -29,7 +29,7 @@ def products(category=0):
         products = Product.query.all()
         print(products)
         return rt('products.html',products=products)
-    return rt('products.html',products=Product.query.filter_by(category=category).all(),logged_id=is_logged_in())
+    return rt('products.html',products=Product.query.filter_by(category=category).all(),logged_id=is_logged_in(),category=Category.query.filter_by(id=category).first())
 
 @shop.route('/product/<id>')
 def product(id = 0):

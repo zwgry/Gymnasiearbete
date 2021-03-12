@@ -30,9 +30,9 @@
         <h1 class="color-white">{{product.name}}</h1>
         <p class="color-white">Det finns {{product.stock}} i lager</p>
         <div class="input-group amount-product">
-            <input type="number" class="form-control" name="amount" value="1" min="1" max="{{product.stock}}" onkeydown="return false">
+            <input id="numberInput" type="number" class="form-control" name="amount" value="1" min="1" max="{{product.stock}}" onkeydown="return false">
             <div class="input-group-append">
-                <button class="btn btn-cherry" onclick="addProductToCookie('bag', {{product.id}}, 1)"><a class="color-white"><i class="fa fa-plus-square"></i></a></button>
+                <button class="btn btn-cherry" onclick="addProduct({{product.id}})"><a class="color-white"><i class="fa fa-plus-square"></i></a></button>
             </div>
         </div>
     </div>
