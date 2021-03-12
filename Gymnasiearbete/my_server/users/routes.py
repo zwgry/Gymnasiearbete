@@ -1,6 +1,6 @@
 from flask import redirect, url_for, request, flash, session, Blueprint
 from flask import render_template as rt
-from my_server.users.utils import no_login, login_required,send_email
+from my_server.users.utils import no_login, login_required,send_email, is_logged_in
 from my_server import db
 from my_server.models import User
 import datetime
@@ -23,7 +23,25 @@ def login():
                     session['logged_in'] = True
                     return redirect(url_for('main.start'))
         flash('användarnamnet eller lösenordet är felaktigt','warning')
-    return rt('login.html')
+    return rt('login.html',logged_id=is_logged_in())
+
+@users.route('/edit_profile', methods=['GET','POST'])
+@login_required
+def edit_user():
+    if request.method == 'POST':
+        username = request.form['username']
+        name = request.form['name']
+        email = request.form['email']
+        id = request.form['id']
+        user = User.query.filter_by(id=id).first()
+        user.username = username
+        user.name = name
+        user.email = email
+        db.session.commit()
+        return rt('edit_user.html', user = user)
+    user_id = request.args['id']
+    user = User.query.filter_by(id=user_id).first()
+    return rt('edit_user.html', user = user,logged_id=is_logged_in())
 
 @users.route('/logout')
 @login_required
@@ -59,9 +77,11 @@ def register():
             flash('användare skapad, vi har skickat ett bekräftelsemail till din mailadress','success')
             return redirect(url_for('users.login'))
     else:
-        return rt('sign_up.html')
+        return rt('sign_up.html',logged_id=is_logged_in())
 
-
+@users.route('/newsletter/register')
+def newsletter_registration():
+    return rt('newsletter_registartion.html',logged_id=is_logged_in())
 
 @users.route("/reset_password/<token>", methods=['GET', 'POST'])
 @login_required

@@ -14,5 +14,11 @@
                 </div>            
             </div>
         {% endfor %}
+        <div class="col mar5">
+            <div class="category_container">
+                <h3 class='color-product' >Nyhetsbrev</h3>
+                <a href="{{ url_for('admin.send_email') }}" class="btn btn-outline-primary">Sicka mail</a>
+            </div>            
+        </div>
     </div>
 {% endblock%}

@@ -1,6 +1,6 @@
 from flask import redirect, url_for, session, request, Blueprint, make_response
 from flask import render_template as rt
-from my_server.shop.utils import sql_request, sql_request_prepared, sql_to_list
+from my_server.shop.utils import is_logged_in
 from my_server.models import Category, Product, Picture
 from my_server import db
 import json
@@ -29,11 +29,11 @@ def products(category=0):
         products = Product.query.all()
         print(products)
         return rt('products.html',products=products)
-    return rt('products.html',products=Product.query.filter_by(category=category).all())
+    return rt('products.html',products=Product.query.filter_by(category=category).all(),logged_id=is_logged_in())
 
 @shop.route('/product/<id>')
 def product(id = 0):
-    return rt('product.html',product=Product.query.filter_by(id=id).first(),pictures=Picture.query.filter_by(product_id=id).all())
+    return rt('product.html',product=Product.query.filter_by(id=id).first(),pictures=Picture.query.filter_by(product_id=id).all(),logged_id=is_logged_in())
 
 #inmatning till sökfunktionen är en string -> produkten / kategorins namn
 #TODO: skriv klart get funktionen så att den oxå kan skicka data från sökning
@@ -71,7 +71,7 @@ def sort_search(category=0,order=''):
 def cookie_ajax():
     cookie = json.loads(request.args['data'])
     if cookie == '':
-        return json.dumps("apa")
+        return json.dumps("error")
     ids = []
     amounts = []
     for product in cookie:
@@ -88,5 +88,4 @@ def cookie_ajax():
             product_dict = product.as_dict()
             product_dict['stock']=amounts[ids.index(product.id)]
             products_requested.append(product_dict)
-    print(json.dumps(products_requested))
     return json.dumps(products_requested)

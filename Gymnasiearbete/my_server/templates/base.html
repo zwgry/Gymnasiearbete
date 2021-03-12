@@ -47,12 +47,6 @@
                                 <input type="password" class="form-control forms" name="password" placeholder="Lösenord">
                             </div>
                             <button type="submit" class="btn btn-cherry">Logga in!</button>
-                            <div class="form-check">
-                                <input type="checkbox" class="form-check-input" id="dropdownCheck">
-                                <label class="form-check-label text-light" for="dropdownCheck">
-                                  Remember me
-                                </label>
-                              </div>
                         </form>
                         <div class="pt-3 text-center">
                             <small class="text-light">
@@ -62,37 +56,8 @@
                     </div>
                 </li>
                 <li class="nav-item dropdown">
-                    <a id="shopping-cart" class="nav-link nav-color" data-toggle="dropdown"><i class="fa fa-shopping-cart"></i></a>
-                    <div class="dropdown-menu dropdown-menu-right color-darkernight shopping-cart-width">
-                        <a href="#"><div class="shopping-cart-box color-cherry shopping-cart-link">
-                            <div class="shopping-cart-overflow shopping-cart-name"><p>HEJ HEJ HEJ HEJ HEJ HEJ HEJ HEJ HEJ HEJ HEJ HEJ HEJ HEJ HEJ HEJ HEJ HEJ HEJ HEJ HEJ HEJ HEJ HEJ HEJ HEJ HEJ HEJ HEJ HEJ</p></div>
-                            <div class="shopping-cart-amount"><p>4 st</p></div>
-                            <div class="shopping-cart-price"><p>10 040 kr</p></div>
-                        </div></a>
-                        <a href="#"><div class="shopping-cart-box color-cherry shopping-cart-link">
-                            <div class="shopping-cart-overflow shopping-cart-name"><p>HEJ HEJ HEJ HEJ HEJ HEJ HEJ HEJ HEJ HEJ HEJ HEJ HEJ HEJ HEJ HEJ HEJ HEJ HEJ HEJ HEJ HEJ HEJ HEJ HEJ HEJ HEJ HEJ HEJ HEJ</p></div>
-                            <div class="shopping-cart-amount"><p>4 st</p></div>
-                            <div class="shopping-cart-price"><p>10 040 kr</p></div>
-                        </div></a>
-                        <a href="#"><div class="shopping-cart-box color-cherry shopping-cart-link">
-                            <div class="shopping-cart-overflow shopping-cart-name"><p>HEJ HEJ HEJ HEJ HEJ HEJ HEJ HEJ HEJ HEJ HEJ HEJ HEJ HEJ HEJ HEJ HEJ HEJ HEJ HEJ HEJ HEJ HEJ HEJ HEJ HEJ HEJ HEJ HEJ HEJ</p></div>
-                            <div class="shopping-cart-amount"><p>4 st</p></div>
-                            <div class="shopping-cart-price"><p>10 040 kr</p></div>
-                        </div></a>
-                        <a href="#"><div class="shopping-cart-box color-cherry shopping-cart-link">
-                            <div class="shopping-cart-overflow shopping-cart-name"><p>HEJ HEJ HEJ HEJ HEJ HEJ HEJ HEJ HEJ HEJ HEJ HEJ HEJ HEJ HEJ HEJ HEJ HEJ HEJ HEJ HEJ HEJ HEJ HEJ HEJ HEJ HEJ HEJ HEJ HEJ</p></div>
-                            <div class="shopping-cart-amount"><p>4 st</p></div>
-                            <div class="shopping-cart-price"><p>10 040 kr</p></div>
-                        </div></a>
-                        <a href="#"><div class="shopping-cart-box color-cherry shopping-cart-link">
-                            <div class="shopping-cart-overflow shopping-cart-name"><p>HEJ HEJ HEJ HEJ HEJ HEJ HEJ HEJ HEJ HEJ HEJ HEJ HEJ HEJ HEJ HEJ HEJ HEJ HEJ HEJ HEJ HEJ HEJ HEJ HEJ HEJ HEJ HEJ HEJ HEJ</p></div>
-                            <div class="shopping-cart-amount"><p>4 st</p></div>
-                            <div class="shopping-cart-price"><p>10 040 kr</p></div>
-                        </div></a>
-                        <div class="shopping-cart-box color-cherry">
-                            <div style="float: left; width: 50%;"><p>Totalt: 99999999 kr</p></div>
-                            <div style="float: right; width: 50%;"><button type="submit" class="btn btn-cherry">Gå vidare!</button></div>
-                        </div>
+                    <a onclick="shoppingCart()" class="nav-link nav-color" data-toggle="dropdown"><i class="fa fa-shopping-cart"></i></a>
+                    <div class="dropdown-menu dropdown-menu-right color-darkernight shopping-cart-width" id="shopping-cart">
                     </div>
                 </li>
             </ul>

@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block title %}Profil - {{user.name}}{% endblock %}
+
+{% block head %}
+    <script src="{{ url_for('static', filename='product_slideshow.js') }}"></script>
+{% endblock %}
+
+{%block content%}
+    <div class="container mt-1vh">
+        <form action="{{url_for('users.edit_user')}}" method="POST">
+            <div class="form-group">
+                <label for="username">Användarnamn</label>
+                <input type="text" class="form-control" name="username" value="{{user.username}}">
+            </div>
+            <div class="form-group">
+                <label for="name">Namn</label>
+                <input type="name" class="form-control" name="name" value="{{user.name}}">
+            </div>
+            <div class="form-group">
+                <label for="email">Mailadress</label>
+                <input type="text" class="form-control" name="email" value="{{user.email}}">
+            </div>
+            <div class="form-group">
+                <input type="hidden" name="id" value="{{user.id}}">
+            </div>
+            <button class="btn btn-outline-primary" type="submit">Spara</button>
+        </form> 
+    </div>
+{%endblock%}
