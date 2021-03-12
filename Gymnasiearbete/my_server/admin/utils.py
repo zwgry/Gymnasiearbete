@@ -13,6 +13,10 @@ def send_newsletter(subject,content,recipients):
     msg.body = content
     mail.send(msg)
 
+def is_logged_in():
+    if 'logged_in' in session:
+        return True
+    return False
 
 # kollar om användaren är en admin
 def admin_required(f):

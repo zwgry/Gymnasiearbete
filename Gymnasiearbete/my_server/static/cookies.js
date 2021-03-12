@@ -15,9 +15,7 @@ function startCookie(){
     if (currentCookie == "[]") {
       currentCookie = JSON.parse(currentCookie);
     }
-    addProductToCookie("bag",3,3);
   } else {
-    console.log("aaaa")
     createCookie("bag",'[]',week);
     currentCookie = [];
   }
@@ -44,11 +42,15 @@ function addProductToCookie(type,product,ammount){
     createCookie(type,currentCookie,week);
 }
 
+function addProduct(product){
+  var ammount = document.getElementById("")
+}
+
 function createCookie(type,value,time){
   var d = new Date();
   d.setTime(d.getTime() + time);
   var expires = "expires="+d.toUTCString();
-  document.cookie = type+"="+JSON.stringify(value)+";"+expires+";path=/; Secure";  
+  document.cookie = type+"="+JSON.stringify(value)+";"+expires+";path=/;";  
 }
 
 function acceptedCookies(){
