@@ -1,6 +1,6 @@
 {% extends 'base.html'%}
 
-{% block title %}FÖRETAGSNAMN {% endblock %}
+{% block title %}buystuff.se{% endblock %}
 
 {% block head %}
     <script src="{{ url_for('static', filename='start_slideshow.js') }}"></script>
@@ -12,7 +12,7 @@
             <div class="slideshow-container-start">
                 {% for picture in pictures %}    
                     <div class="mySlides2 center">
-                        <img src="/{{picture.filepath}}" alt="{{picture[0]}}">
+                        <img class="img-responsive" src="/{{picture.filepath}}" alt="{{picture[0]}}">
                     </div>
                 {% endfor %}
                 <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
@@ -25,19 +25,15 @@
                 {%endfor%}
             </div>
         </div>
-
-        {% for popular_product in popular_products %}
-        <div class="col mar5">
-            <a href="{{url_for(product, popular_product.id)}}" class="color-product" style="text-decoration: none;">
-                <div class="product">
-                    <img class="vertical-center img_center" src="{{popoular_product.filepath}}" alt="">
-                </div>
-                <h3>{{popular_product.id}}</h3>
-            </a>
-        </div>
-        {% endfor %}
-
     </div>
-    {{products}}
-    {{pictures}}
+
+    
+    <div id="products" class="row">
+        {% for product in products %}
+        <div class="col mar5"><a href="{{url_for('shop.product', id=product.id)}}" class="color-product" style="text-decoration: none;">
+            <div class="product"><img class="center" src=/{{pictures[loop.index-1].filepath}} alt=""></div>
+            <h3>{{product.name}}</h3>
+        </a></div>
+        {% endfor %}
+    </div>
 {% endblock %}
