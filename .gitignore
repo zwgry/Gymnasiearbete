@@ -1,5 +1,4 @@
 .vscode/
-db_test.db
 workspace.code-workspace
 README.md
 Gymnasiearbete/my_server/__pycache__

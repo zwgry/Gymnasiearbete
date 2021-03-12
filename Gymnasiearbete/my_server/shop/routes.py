@@ -27,7 +27,6 @@ def products(category=0):
         return rt('products.html',products=data)
     elif category == 0:
         products = Product.query.all()
-        print(products)
         return rt('products.html',products=products)
     return rt('products.html',products=Product.query.filter_by(category=category).all(),logged_id=is_logged_in(),category=Category.query.filter_by(id=category).first())
 
@@ -36,11 +35,9 @@ def product(id = 0):
     return rt('product.html',product=Product.query.filter_by(id=id).first(),pictures=Picture.query.filter_by(product_id=id).all(),logged_id=is_logged_in())
 
 #inmatning till sökfunktionen är en string -> produkten / kategorins namn
-#TODO: skriv klart get funktionen så att den oxå kan skicka data från sökning
 @shop.route('/search_products_categories', methods = ['POST','GET'])
 @shop.route('/search_products_categories/<search>')
 def search(search = ''):
-    #borde fungera
     if request.method == 'POST':
         search = request.form['parameter']
         if search == '': 
