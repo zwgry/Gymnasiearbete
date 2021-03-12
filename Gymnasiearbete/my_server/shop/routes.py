@@ -71,7 +71,7 @@ def sort_search(category=0,order=''):
 def cookie_ajax():
     cookie = json.loads(request.args['data'])
     if cookie == '':
-        return json.dumps("apa")
+        return json.dumps("error")
     ids = []
     amounts = []
     for product in cookie:
@@ -88,5 +88,4 @@ def cookie_ajax():
             product_dict = product.as_dict()
             product_dict['stock']=amounts[ids.index(product.id)]
             products_requested.append(product_dict)
-    print(json.dumps(products_requested))
     return json.dumps(products_requested)

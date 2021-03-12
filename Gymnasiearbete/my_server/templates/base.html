@@ -47,12 +47,6 @@
                                 <input type="password" class="form-control forms" name="password" placeholder="Lösenord">
                             </div>
                             <button type="submit" class="btn btn-cherry">Logga in!</button>
-                            <div class="form-check">
-                                <input type="checkbox" class="form-check-input" id="dropdownCheck">
-                                <label class="form-check-label text-light" for="dropdownCheck">
-                                  Remember me
-                                </label>
-                              </div>
                         </form>
                         <div class="pt-3 text-center">
                             <small class="text-light">
@@ -62,16 +56,8 @@
                     </div>
                 </li>
                 <li class="nav-item dropdown">
-                    <a id="shopping-cart" class="nav-link nav-color" data-toggle="dropdown"><i class="fa fa-shopping-cart"></i></a>
-                    <div class="dropdown-menu dropdown-menu-right color-darkernight shopping-cart-width">
-                        <div class="px-4 py-3">
-                            <a href="#"><div class="row shopping-cart-width" style="height: 4vh;">
-                                <div class="col-sm-2" style="height: 100%;"><img src="/static/images/2217932_0.jpg" style="height: 100%"></div>
-                                <div class="col-sm-6 shopping-cart-overflow"><p>HEJ HEJ HEJ HEJ HEJ HEJ HEJ HEJ HEJ HEJ HEJ HEJ HEJ HEJ</p></div>
-                                <div class="col-sm-1"><p>4</p></div>
-                                <div class="col-sm-3"><p>40 kr</p></div>
-                            </div></a>
-                        </div>
+                    <a onclick="shoppingCart()" class="nav-link nav-color" data-toggle="dropdown"><i class="fa fa-shopping-cart"></i></a>
+                    <div class="dropdown-menu dropdown-menu-right color-darkernight shopping-cart-width" id="shopping-cart">
                     </div>
                 </li>
             </ul>

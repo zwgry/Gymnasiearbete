@@ -2,6 +2,7 @@ var currentCookie;
 var week = 1000*60*60*24*7;
 
 $(document).ready(function(){
+  startCookie();
   if (getCookie("acceptCookie") != "true") {
     document.getElementById("accept-cookie").style.display = "block";
   }
@@ -9,9 +10,14 @@ $(document).ready(function(){
 
 function startCookie(){
   currentCookie = JSON.parse(getCookie("bag"));
+  console.log(JSON.parse(getCookie("bag")));
   if (currentCookie != null){
-    //Nånging fint med kundvagning
+    if (currentCookie == "[]") {
+      currentCookie = JSON.parse(currentCookie);
+    }
+    addProductToCookie("bag",3,3);
   } else {
+    console.log("aaaa")
     createCookie("bag",'[]',week);
     currentCookie = [];
   }
@@ -33,22 +39,8 @@ function getCookie(cname){
   return null;
 }
 
-function getProducts(cookie){
-  $.ajax({
-    type: 'GET',
-    url: "/cookie_products",
-    data: {
-      data:JSON.stringify(cookie),
-    },
-    dataType : "json",
-    success: (response) => {
-      console.log(response);
-    }});
-}
-
 function addProductToCookie(type,product,ammount){
     currentCookie.push([product,ammount]);
-    //console.log(currentCookie);
     createCookie(type,currentCookie,week);
 }
 
@@ -65,9 +57,21 @@ function acceptedCookies(){
 }
 
 function shoppingCart(){
-  let h="";
-  for (let i = 0; i < response[0].length; i++) {
-      h += "";
-  }
-  $("#shopping-cart").html(h);
+  $.ajax({
+    type: 'GET',
+    url: "/cookie_products",
+    data: {
+      data:JSON.stringify(currentCookie),
+    },
+    dataType : "json",
+    success: (response) => {
+      let h="";
+      var totalPrice = 0;
+      for (let i = 0; i < response.length; i++) {
+        totalPrice += response[i]['price']*response[i]['stock']
+        h+='<a href="/product/"'+response[i]["id"]+'><div class="shopping-cart-box color-cherry shopping-cart-link"><div class="shopping-cart-overflow shopping-cart-name"><p>'+response[i]["name"]+'</p></div><div class="shopping-cart-amount"><p>'+response[i]["stock"]+' st</p></div><div class="shopping-cart-price"><p>'+response[i]["price"]+' kr</p></div></div></a>'
+      }
+      h+='<div class="shopping-cart-box color-cherry"><div style="float: left; width: 50%;"><p>Totalt: '+totalPrice+' kr</p></div><div style="float: right; width: 50%;"><button type="submit" class="btn btn-cherry">Gå vidare!</button></div></div>'
+      $("#shopping-cart").html(h);
+    }});
 }
