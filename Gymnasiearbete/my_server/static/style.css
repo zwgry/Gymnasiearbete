@@ -3,12 +3,12 @@
 } 
 
 .nav-color{
-    color: grey;
+    color: grey !important;
 }
 
 .nav-color:hover {
-    color: lightgray;
-    cursor: pointer;
+    color: lightgray !important;
+    cursor: pointer !important;
 }
 
 .right {
@@ -16,7 +16,7 @@
 }
 
 .color-white, .color-white:hover {
-    color: white;
+    color: white !important;
 }
 
 .btn-cherry {
@@ -29,15 +29,20 @@
 }
 
 .color-cherry {
-    color: #F2505D;
+    color: #F2505D !important;
 }
 
 .color-cherry:hover {
-    color: #F23D3D;
+    color: #F23D3D !important;
+    background-color: #262223 !important;
+}
+
+.color-cherry:focus {
+    background-color: #262223 !important;
 }
 
 .color-strawberry {
-    color: #F23D3D;
+    color: #F23D3D !important;
 }
 
 .color-cherry-bg {
@@ -53,7 +58,7 @@
 }
 
 .color-darknight {
-    background-color: #262223;
+    background-color: #262223 !important;
 }
 
 .color-darkernight {
@@ -75,6 +80,38 @@
 .search-text-overflow {
     overflow: hidden;
     text-overflow: ellipsis;
+}
+
+.search-text-color {
+    background-color: #262223 !important;
+}
+
+.search-text-color:hover {
+    background-color: #403D3E !important;
+}
+
+.search-text-color:focus {
+    background-color: #F2505D !important;
+}
+
+.profile-color {
+    background-color: #1a1717 !important;
+}
+
+.profile-color:hover {
+    background-color: #262223 !important;
+}
+
+.profile-color:focus {
+    background-color: #F2505D !important;
+}
+
+.shopping-cart-color {
+    background-color: #1a1717 !important;
+}
+
+.shopping-cart-color:hover {
+    background-color: #F2505D !important;
 }
 
 .slideshow-container {
@@ -224,7 +261,6 @@
 
 .amount-product {
     margin: auto;
-    margin-top: 35vh;
     width: 75% !important;
 }
 
@@ -256,10 +292,6 @@
 
 .shopping-cart-link {
     text-decoration: none;
-}
-
-.shopping-cart-link:hover {
-    background-color: #262223;
 }
 
 .shopping-cart-box {

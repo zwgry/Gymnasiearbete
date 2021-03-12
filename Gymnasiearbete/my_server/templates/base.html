@@ -29,7 +29,7 @@
                 <ul class="navbar-nav justify-content-center">
                     <li class="nav-item dropdown" style="width: 75%;">
                         <input class="form-control" type="text"  onkeyup="searchFunction(this.value)" placeholder="Sök" data-toggle="dropdown">
-                        <div id="searchDropdownMenu" class="dropdown-menu">
+                        <div id="searchDropdownMenu" class="dropdown-menu color-darknight">
                         </div>
                     </li>
                 </ul>
@@ -39,6 +39,7 @@
                 <li class="nav-item dropdown">
                     <a class="nav-link nav-color" data-toggle="dropdown"><i class="fa fa-user mr-1"></i></a>    
                     <div class="dropdown-menu dropdown-menu-right color-darkernight">
+                        {% if logged_id == False %}
                         <form class="px-4 py-3" action="{{url_for('users.login')}}" method='post'>
                             <div class="form-group">
                                 <input type="name" class="form-control forms" name="username" placeholder="Användarnamn">
@@ -53,6 +54,10 @@
                                 Eller behöver du ett konto? <a href="{{url_for('users.register')}}" class="ml-2 color-cherry"><br>Skapa ett konto!</a>
                             </small>
                         </div>
+                        {% elif logged_id == True %}
+                        <a class="dropdown-item profile-color color-white" href="{{url_for('users.edit_user')}}">Inställningar</a>
+                        <a class="dropdown-item profile-color color-white" href="{{url_for('users.logout')}}">Logga ut!</a>
+                        {% endif %}
                     </div>
                 </li>
                 <li class="nav-item dropdown">

@@ -12,15 +12,15 @@ function searchFunction(input) {
                 return null;
             }  
             let s = "";
-            s += "<h5 class='dropdown-header'>Produkt</h5>";
+            s += "<h5 class='dropdown-header search-text-color color-white'>Produkt</h5>";
             let id = 1;
             for (let j = 0; j < response.length; j++ ) {
                 for (let i = 0; i < response[j].length; i++) {
-                    s += "<a class='dropdown-item search-text-overflow' href='#' id='dropdown"+id+"'>" + response[j][i].name + "</a>";
+                    s += "<a class='dropdown-item search-text-overflow search-text-color color-white' href='#' id='dropdown"+id+"'>" + response[j][i].name + "</a>";
                     id++;
                 }
                 if (j == 0) {
-                s += "<h5 class='dropdown-header'>Kategori</h5>";
+                s += "<h5 class='dropdown-header search-text-color color-white'>Kategori</h5>";
                 }
             }
             $("#searchDropdownMenu").html(s);
