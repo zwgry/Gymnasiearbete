@@ -72,7 +72,7 @@ function shoppingCart(){
       var totalPrice = 0;
       for (let i = 0; i < response.length; i++) {
         totalPrice += response[i]['price']*response[i]['stock']
-        h+='<a href="/product/"'+response[i]["id"]+'><div class="shopping-cart-box color-cherry shopping-cart-link"><div class="shopping-cart-overflow shopping-cart-name"><p>'+response[i]["name"]+'</p></div><div class="shopping-cart-amount"><p>'+response[i]["stock"]+' st</p></div><div class="shopping-cart-price"><p>'+response[i]["price"]+' kr</p></div></div></a>'
+        h+='<a href="/product/'+response[i]["id"]+'"><div class="shopping-cart-box color-cherry shopping-cart-link"><div class="shopping-cart-overflow shopping-cart-name"><p>'+response[i]["name"]+'</p></div><div class="shopping-cart-amount"><p>'+response[i]["stock"]+' st</p></div><div class="shopping-cart-price"><p>'+response[i]["price"]+' kr</p></div></div></a>'
       }
       h+='<div class="shopping-cart-box color-cherry"><div style="float: left; width: 50%;"><p>Totalt: '+totalPrice+' kr</p></div><div style="float: right; width: 50%;"><button type="submit" class="btn btn-cherry">Gå vidare!</button></div></div>'
       $("#shopping-cart").html(h);
