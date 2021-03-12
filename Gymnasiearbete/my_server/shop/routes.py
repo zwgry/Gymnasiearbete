@@ -1,6 +1,6 @@
 from flask import redirect, url_for, session, request, Blueprint, make_response
 from flask import render_template as rt
-from my_server.shop.utils import is_logged_in
+from my_server.shop.utils import is_logged_in, sql_to_list
 from my_server.models import Category, Product, Picture
 from my_server import db
 import json
