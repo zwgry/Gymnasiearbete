@@ -10,7 +10,6 @@ $(document).ready(function(){
 
 function startCookie(){
   currentCookie = JSON.parse(getCookie("bag"));
-  console.log(JSON.parse(getCookie("bag")));
   if (currentCookie != null){
     if (currentCookie == "[]") {
       currentCookie = JSON.parse(currentCookie);
@@ -43,7 +42,9 @@ function addProductToCookie(type,product,ammount){
 }
 
 function addProduct(product){
-  var ammount = document.getElementById("")
+  var ammount = parseInt(document.getElementById("numberInput").value);
+  addProductToCookie("bag",product,ammount);
+
 }
 
 function createCookie(type,value,time){
