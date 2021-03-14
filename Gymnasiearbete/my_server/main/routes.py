@@ -14,9 +14,16 @@ def start():
     products_id = []
     products = []
     pictures = []
-    for i in range(6):
-        products_id.append(randint(1,Product.query.count()))
+    iterations = 6
+    i = 0
+    while i < iterations:
+        id = randint(1,Product.query.count())
+        if id not in products_id:
+            product = Product.query.filter_by(id=id).first()
+            if product is not None:
+                products_id.append(id)
+                products.append(product)
+                i += 1
     for id in products_id:
-        products.append(Product.query.filter_by(id=id).first())
         pictures.append(Picture.query.filter_by(product_id=id).first())
     return rt('index.html',products=products,pictures=pictures,logged_id=is_logged_in(), user=get_current_user())
