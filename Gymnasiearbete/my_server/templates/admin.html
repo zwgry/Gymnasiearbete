@@ -16,8 +16,14 @@
         {% endfor %}
         <div class="col mar5">
             <div class="category_container color-darkernight">
-                <h3 class='color-text-cherry' >Nyhetsbrev</h3>
+                <h3 class='color-text-cherry'>Nyhetsbrev</h3>
                 <a href="{{ url_for('admin.send_email') }}" class="btn btn-cherry">Sicka mail</a>
+            </div>            
+        </div>
+        <div class="col mar5">
+            <div class="category_container color-darkernight">
+                <h3 class='color-text-cherry'>Lägg till produkt</h3>
+                <a href="{{ url_for('admin.admin_add') }}" class="btn btn-cherry">Lägg till</a>
             </div>            
         </div>
     </div>

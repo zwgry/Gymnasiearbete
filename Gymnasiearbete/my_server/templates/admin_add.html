@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block title %}Admin - lägg till ny produkt| buystuff.se{% endblock %}
+
+{% block head %}
+    <link rel="stylesheet" type="text/css" href="..{{ url_for('static', filename='admin_style.css') }}">
+    <script src="{{ url_for('static', filename='product_slideshow.js') }}"></script>
+{% endblock %}
+
+{%block content%}
+<div class="row">
+    <div class="col-sm-7 add-center">
+        <form action="{{url_for('admin.admin_add')}}" method="POST">
+            <div class="form-group">
+                <label for="name">Produktnamn</label>
+                <input type="name" class="form-control" name="name" placeholder="Produktnamn">
+            </div>
+            <div class="form-group">
+                <label for="name">Beskrivning</label>
+                <textarea class="form-control" rows="10" name="description" placeholder="Beskriving"></textarea>
+            </div>
+            <div class="form-group">
+                <label for="name">Antal</label>
+                <input type="number" class="form-control" name="stock" placeholder="Antal i lager">
+            </div>
+            <div class="form-group">
+                <label for="name">Pris</label>
+                <input type="number" class="form-control" name="price" placeholder="Pris">
+            </div>
+            <div class="form-group">
+                <label for="name">Kateogri</label>
+                <input type="text" class="form-control" name="category" placeholder="Kategori (id)">
+            </div>
+            <button class="btn btn-cherry" type="submit">Spara</button>
+        </form> 
+    </div>
+</div>
+{%endblock%}

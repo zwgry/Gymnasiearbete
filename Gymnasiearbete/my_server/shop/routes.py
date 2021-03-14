@@ -43,7 +43,11 @@ def search(search = ''):
 
 @shop.route('/checkout')
 def checkout():
-    return rt('checkout.html', logged_id=is_logged_in(),user=get_current_user())
+    return rt('checkout.html', logged_id=is_logged_in(),user=get_current_user(),categories = Category.query.all())
+
+@shop.route('/payment')
+def payment():
+    return rt('payment.html', logged_id=is_logged_in(),user=get_current_user(),categories = Category.query.all())
 
 @shop.route('/sort', methods = ['POST'])
 def sort_search(category=0,order=''):

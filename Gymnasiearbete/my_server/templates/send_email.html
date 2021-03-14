@@ -2,24 +2,24 @@
 
 {% block title %}Admin | buystuff.se{% endblock %}
 
-{% block head %}{% endblock %}
+{% block head %}<link rel="stylesheet" type="text/css" href="..{{ url_for('static', filename='admin_style.css') }}">{% endblock %}
 
 {%block content%}
     <div class="container">
-        <form action="{{url_for('admin.send_email')}}" method='post'>
+        <form action="{{url_for('admin.send_email')}}" method='post' class="email-form">
             <div class="form-group">
-                <input type="name" class="form-control forms" name="subject" placeholder="Ämne">
+                <input type="name" class="form-control" name="subject" placeholder="Ämne">
             </div>
             <div class="form-group">
                 <textarea class="form-control" rows="10" name="content" placeholder="Inehåll"></textarea>
             </div>
-            <div class="form-group display-flex">
-                <input type="checkbox" class="form-control forms" id="newsletter" name="newsletter" value="True">
+            <div class="form-group display-flex email-checkbox">
                 <label for="newsletter">Nyhetsbrev</label>
+                <input type="checkbox" class="form-control forms" id="newsletter" name="newsletter" value="True">
             </div>
-            <div class="form-group display-flex">
-                <input type="checkbox" class="form-control forms" id="general" name="general" value="True">
+            <div class="form-group display-flex email-checkbox">
                 <label for="general">Generelt</label>
+                <input type="checkbox" class="form-control forms" id="general" name="general" value="True">
             </div>
             <button type="submit" class="btn btn-cherry">Skicka mail</button>
         </form>

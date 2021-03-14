@@ -2,7 +2,7 @@ from flask import redirect, url_for, request, flash, session, Blueprint
 from flask import render_template as rt
 from my_server.users.utils import no_login, login_required,send_email, is_logged_in, get_current_user
 from my_server import db
-from my_server.models import User
+from my_server.models import User, Category, Newsletter_Recipients
 import datetime
 import bcrypt
 
@@ -23,7 +23,7 @@ def login():
                     session['logged_in'] = True
                     return redirect(url_for('main.start'))
         flash('användarnamnet eller lösenordet är felaktigt','warning')
-    return rt('login.html',logged_id=is_logged_in(),user=get_current_user())
+    return rt('login.html',logged_id=is_logged_in(),user=get_current_user(),categories = Category.query.all())
 
 @users.route('/edit_profile', methods=['GET','POST'])
 @login_required
@@ -38,10 +38,10 @@ def edit_user():
         user.name = name
         user.email = email
         db.session.commit()
-        return rt('edit_user.html', user = user,logged_id=is_logged_in())
+        return rt('edit_user.html', user = user,logged_id=is_logged_in(),categories = Category.query.all())
     user_id = request.args['id']
     user = User.query.filter_by(id=user_id).first()
-    return rt('edit_user.html', user = user,logged_id=is_logged_in())
+    return rt('edit_user.html', user = user,logged_id=is_logged_in(),categories = Category.query.all())
 
 @users.route('/logout')
 @login_required
@@ -64,10 +64,10 @@ def register():
         for user in current_users:
             if user.username == username:
                 flash('användarnamnet används redan','warning')
-                return rt('sign_up.html')
+                return rt('sign_up.html',categories = Category.query.all())
             elif user.email == email:
                 flash('mailen används redan','warning')
-                return rt('sign_up.html')
+                return rt('sign_up.html',categories = Category.query.all())
         if password == password2:
             hashed_password = bcrypt.hashpw(password.encode('utf-8'),bcrypt.gensalt())
             new_user = User(username=username,name=f_name+' '+l_name,email=email,password=hashed_password)
@@ -77,11 +77,21 @@ def register():
             flash('användare skapad, vi har skickat ett bekräftelsemail till din mailadress','success')
             return redirect(url_for('users.login'))
     else:
-        return rt('sign_up.html',logged_id=is_logged_in(),user=get_current_user())
+        return rt('sign_up.html',logged_id=is_logged_in(),user=get_current_user(),categories = Category.query.all())
 
-@users.route('/newsletter/register')
+@users.route('/newsletter/register', methods = ['POST','GET'])
 def newsletter_registration():
-    return rt('newsletter_registartion.html',logged_id=is_logged_in())
+    if request.method == 'POST':
+        email = request.form['email']
+        for recipient in Newsletter_Recipients.query.all():
+            if recipient.email == email:
+                flash('Mailen är redan registrerad','warning')
+                return rt('newsletter_registration.html',logged_id=is_logged_in(),user=get_current_user())
+        nlr = Newsletter_Recipients(email=email)
+        db.session.add(nlr)
+        db.session.commit()
+        flash('Mail är nu registrerad','success')
+    return rt('newsletter_registration.html',logged_id=is_logged_in(),user=get_current_user())
 
 @users.route("/reset_password/<token>", methods=['GET', 'POST'])
 def confirm_token(token):

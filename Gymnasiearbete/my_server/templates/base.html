@@ -106,13 +106,14 @@
     </div>
     <div class="col-sm-8 color-darknight ta-c">
         {%block content%}{% endblock%}
+        
+    </div>
+    <div class="col-sm-2 color-cherry-bg">
         <div class="flash-message">
             {% for category, message in get_flashed_messages(with_categories = True) %}
                     <p class="alert alert-{{category}} alert-dismissible fade show mt-3"><button type="button" class="close" data-dismiss="alert">&times;</button> {{ message }} </p>          
             {% endfor %}
         </div>
-    </div>
-    <div class="col-sm-2 color-cherry-bg">
         {%block right%}{%endblock%}
     </div>
 </div>
@@ -125,7 +126,10 @@
 </div>
 
 <div class="footer-bottom mt-auto color-darkernight jumbotron jumbotron-fluid text-center">
-    <p class="h3 text-white"></p>
+    <h3 class="text-white">Copyrght @ Mathias & Lukas 2021</h3>
+    <a href="{{ url_for('users.newsletter_registration') }}">
+        <h5 class="text-white">Gå med i nyhetsbrevet</h5>
+    </a>
 </div>
 
 </body>

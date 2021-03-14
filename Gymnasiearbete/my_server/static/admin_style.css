@@ -22,3 +22,22 @@
     float: right;
     margin-right: 5vh;
 }
+
+.add-center {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.email-checkbox {
+    margin-left: auto;
+    margin-right: auto;
+    width: 10vw;
+    color: white;
+}
+
+.email-form {
+    margin-top: 4vh;
+    width: 60%;
+    margin-left: auto;
+    margin-right: auto;
+}
