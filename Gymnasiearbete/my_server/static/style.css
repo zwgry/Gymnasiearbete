@@ -302,13 +302,12 @@
 
 .shopping-cart-name {
     width: 50%;
-    text-align: center; 
     float: left;
 }
 
 .shopping-cart-amount {
     width: 20%; 
-    text-align: center;
+    padding-left: 3%;
     float: left;
 }
 
@@ -324,6 +323,15 @@
 
 .shopping-cart-trash:hover {
     color:white;
+}
+
+.shopping-cart-totalamount {
+    float: left; 
+    width: 50%;
+}
+
+.shopping-cart-button {
+    float: right; 
 }
 
 #searchDropdownMenu {
