@@ -14,8 +14,8 @@ app.config['SECURITY_PASSWORD_SALT'] = os.urandom(16)
 app.config['MAIL_SERVER'] = 'smtp.googlemail.com'
 app.config['MAIL_PORT'] = 587
 app.config['MAIL_USE_TLS'] = True
-app.config['MAIL_USERNAME'] = os.environ.get('EMAIL_USER')
-app.config['MAIL_PASSWORD'] = os.environ.get('EMAIL_PASSWORD')
+app.config['MAIL_USERNAME'] = 'testmailgyar@gmail.com' #mail till verifikationsmail och för nyhetsbrev
+app.config['MAIL_PASSWORD'] = 'gyar2020' #lösenord till mailen
 mail = Mail(app)
 db = SQLAlchemy(app)
 
