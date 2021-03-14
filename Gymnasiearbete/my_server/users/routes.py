@@ -18,11 +18,11 @@ def login():
         for user in users:
             if user.username == username:
                 if bcrypt.checkpw(password.encode('utf-8'),user.password):
-                    flash('inloggad','success')
+                    flash('Inloggad','success')
                     session['username'] = username
                     session['logged_in'] = True
                     return redirect(url_for('main.start'))
-        flash('användarnamnet eller lösenordet är felaktigt','warning')
+        flash('Användarnamnet och/eller lösenordet är felaktigt!','warning')
     return rt('login.html',logged_id=is_logged_in(),user=get_current_user(),categories = Category.query.all())
 
 @users.route('/edit_profile', methods=['GET','POST'])
@@ -63,10 +63,10 @@ def register():
         current_users = User.query.all()
         for user in current_users:
             if user.username == username:
-                flash('användarnamnet används redan','warning')
+                flash('Användarnamnet används redan','warning')
                 return rt('sign_up.html',categories = Category.query.all())
             elif user.email == email:
-                flash('mailen används redan','warning')
+                flash('Mailen används redan','warning')
                 return rt('sign_up.html',categories = Category.query.all())
         if password == password2:
             hashed_password = bcrypt.hashpw(password.encode('utf-8'),bcrypt.gensalt())
@@ -74,7 +74,7 @@ def register():
             db.session.add(new_user)
             db.session.commit()
             send_email(new_user)
-            flash('användare skapad, vi har skickat ett bekräftelsemail till din mailadress','success')
+            flash('Användare skapad, vi har skickat ett bekräftelsemail till din mailadress','success')
             return redirect(url_for('users.login'))
     else:
         return rt('sign_up.html',logged_id=is_logged_in(),user=get_current_user(),categories = Category.query.all())
@@ -83,15 +83,18 @@ def register():
 def newsletter_registration():
     if request.method == 'POST':
         email = request.form['email']
+        if email == '':
+            flash('Du måste skriva in din mail','warning')
+            return rt('newsletter_registration.html',logged_id=is_logged_in(),user=get_current_user(),categories = Category.query.all())
         for recipient in Newsletter_Recipients.query.all():
             if recipient.email == email:
                 flash('Mailen är redan registrerad','warning')
-                return rt('newsletter_registration.html',logged_id=is_logged_in(),user=get_current_user())
+                return rt('newsletter_registration.html',logged_id=is_logged_in(),user=get_current_user(),categories = Category.query.all())
         nlr = Newsletter_Recipients(email=email)
         db.session.add(nlr)
         db.session.commit()
         flash('Mail är nu registrerad','success')
-    return rt('newsletter_registration.html',logged_id=is_logged_in(),user=get_current_user())
+    return rt('newsletter_registration.html',logged_id=is_logged_in(),user=get_current_user(),categories = Category.query.all())
 
 @users.route("/reset_password/<token>", methods=['GET', 'POST'])
 def confirm_token(token):

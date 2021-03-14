@@ -90,6 +90,13 @@
 <div class="row flex-grow-1 mr-0px">
     <div class="col-sm-2 color-cherry-bg">
         <ul class="mt-1vh">
+            <a class="text-deco" href="{{ url_for('main.start')}}">
+                <li class="text-overflow">
+                        <h5 class="color-darkernight-text">
+                            Hem
+                        </h5>
+                </li>
+            </a>
             {% for category in categories%}
                 {% if category.id != 0 %}
                 <a class="text-deco" href="{{ url_for('shop.products',category=category.id)}}">
@@ -109,12 +116,12 @@
         
     </div>
     <div class="col-sm-2 color-cherry-bg">
+        {%block right%}{%endblock%}
         <div class="flash-message">
             {% for category, message in get_flashed_messages(with_categories = True) %}
                     <p class="alert alert-{{category}} alert-dismissible fade show mt-3"><button type="button" class="close" data-dismiss="alert">&times;</button> {{ message }} </p>          
             {% endfor %}
         </div>
-        {%block right%}{%endblock%}
     </div>
 </div>
 

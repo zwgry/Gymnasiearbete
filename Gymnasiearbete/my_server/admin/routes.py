@@ -36,7 +36,7 @@ def send_email():
             for recipient in User.query.all():
                 recipients.append(recipient.email)
         if recipients == []:
-            flash('något gick fel, försök igen','warning')
+            flash('Något gick fel, försök igen','warning')
             return rt('send_email.html')
         send_newsletter(subject,content,recipients)
     return rt('send_email.html', logged_id=is_logged_in(), user=get_current_user(),categories = Category.query.filter(Category.name!='Main').all())
@@ -60,6 +60,7 @@ def admin_edit():
         if product.price != price:
             product.price = price                
         db.session.commit()
+        flash('Sparat!')
     elif request.method == 'GET':
         product_id = request.args['product_id']
         if product_id == None:

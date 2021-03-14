@@ -3,6 +3,8 @@
 {% block title %}{{category.name}} | buystuff.se{% endblock %}
 
 {%block content%}
+<h2 class="text-white">{{category.name}}</h2>
+
 <script>
     window.onload = function() {
         sort({{products[0].category}},'DSC');

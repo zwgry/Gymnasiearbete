@@ -12,15 +12,22 @@ function searchFunction(input) {
                 return null;
             }  
             let s = "";
-            s += "<h5 class='dropdown-header search-text-color color-white'>Produkt</h5>";
+            if (JSON.stringify(response[0]) != '[]'){
+                s += "<h5 class='dropdown-header search-text-color color-white'>Produkt</h5>";
+            }
             let id = 1;
             for (let j = 0; j < response.length; j++ ) {
                 for (let i = 0; i < response[j].length; i++) {
-                    s += "<a class='dropdown-item search-text-overflow search-text-color color-white' href='#' id='dropdown"+id+"'>" + response[j][i].name + "</a>";
-                    id++;
+                    if (response[j][i].name != 'Main') {
+                        s += "<a class='dropdown-item search-text-overflow search-text-color color-white pl-5' href='#' id='dropdown"+id+"'>" + response[j][i].name + "</a>";
+                        id++;
+                    }
                 }
                 if (j == 0) {
-                s += "<h5 class='dropdown-header search-text-color color-white'>Kategori</h5>";
+                    if (JSON.stringify(response[1]) != '[]' && JSON.stringify(response[1]) != JSON.stringify([{"id":0,"name":"Main","description":"Main","super_category":0}])){
+                        s += "<h5 class='dropdown-header search-text-color color-white'>Kategori</h5>";
+                    }
+                
                 }
             }
             $("#searchDropdownMenu").html(s);
@@ -69,7 +76,7 @@ function sort(category, order){
                         var picture = response[1][j];
                     }
                 }
-                h += "<div class='col mar5'><a href='/product/"+response[0][i].id+"' class='color-text-cherry' style='text-decoration: none;'><div class='product'><img class='center' src=/"+picture.filepath+" alt=''></div><h3>"+response[0][i].name+"</h3></a></div>";
+                h += "<div class='col mar5'><a href='/product/"+response[0][i].id+"' class='color-text-cherry' style='text-decoration: none;'><div class='product'><img class='center' src=/"+picture.filepath+" alt=''></div><h3>"+response[0][i].name+"</h3><h6>"+response[0][i].price+" kr</h6></a></div>";
             }
             $("#products").html(h);
         }
