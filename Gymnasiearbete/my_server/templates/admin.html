@@ -8,16 +8,16 @@
     <div class="row menu_container">
         {% for category in categories %}
             <div class="col mar5">
-                <div class="category_container">
-                    <h3 class='color-product' >{{category.name}}</h3>
-                    <a href="{{ url_for('admin.admin_category', category_id = category.id) }}" class="btn btn-outline-primary">Visa</a>
+                <div class="category_container color-darkernight">
+                    <h3 class='color-text-cherry' >{{category.name}}</h3>
+                    <a href="{{ url_for('admin.admin_category', category_id = category.id) }}" class="btn btn-cherry">Visa</a>
                 </div>            
             </div>
         {% endfor %}
         <div class="col mar5">
-            <div class="category_container">
-                <h3 class='color-product' >Nyhetsbrev</h3>
-                <a href="{{ url_for('admin.send_email') }}" class="btn btn-outline-primary">Sicka mail</a>
+            <div class="category_container color-darkernight">
+                <h3 class='color-text-cherry' >Nyhetsbrev</h3>
+                <a href="{{ url_for('admin.send_email') }}" class="btn btn-cherry">Sicka mail</a>
             </div>            
         </div>
     </div>

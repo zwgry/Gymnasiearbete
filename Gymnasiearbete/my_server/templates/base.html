@@ -89,7 +89,7 @@
 
 <div class="row flex-grow-1 mr-0px">
     <div class="col-sm-2 color-cherry-bg">{%block left%}{%endblock%}</div>
-    <div class="col-sm-8 color-darknight" style="text-align: center;">
+    <div class="col-sm-8 color-darknight ta-c">
         {%block content%}{% endblock%}
         <div class="flash-message">
             {% for category, message in get_flashed_messages(with_categories = True) %}

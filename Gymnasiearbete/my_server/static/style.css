@@ -28,6 +28,14 @@
     background-color: #F23D3D !important;
 }
 
+.color-text-cherry {
+    color: #F2505D !important;
+}
+
+.color-text-cherry:hover {
+    color: #F23D3D !important;
+}
+
 .color-cherry {
     color: #F2505D !important;
 }
@@ -66,15 +74,15 @@
 }
 
 .color-darkernight-text {
-    color: #1a1717 !important;
-}
-
-.color-darkernight-text:hover {
     color: #403D3E !important;
 }
 
+.color-darkernight-text:hover {
+    color: #1a1717 !important;
+}
+
 .color-lgray {
-    color: #BFBFBF;
+    color: #BFBFBF !important;
 }
 
 .color-product {
@@ -233,6 +241,10 @@
 
 .mt-1vh {
     margin-top: 1vh;
+}
+
+.mt-2vh {
+    margin-top: 2vh;
 }
 
 .mb-1vh {
@@ -399,8 +411,20 @@
     text-overflow: ellipsis;
 }
 
+.text-deco {
+    text-decoration: none;
+}
+
 .text-deco:hover {
     text-decoration: none;
+}
+
+.ta-c {
+    text-align: center;
+}
+
+.display-flex {
+    display: flex;
 }
 
 @media only screen and (max-width: 768px) {
