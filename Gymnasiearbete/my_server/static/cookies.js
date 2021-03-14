@@ -49,6 +49,7 @@ function addProduct(product){
 function removeProduct(product,amount){
   addProductToCookie("bag",product,-amount);
   shoppingCart();
+  shoppingCartPage();
 }
 
 
@@ -83,5 +84,27 @@ function shoppingCart(){
       }
       h+='<div class="shopping-cart-box color-lgray"><div class="shopping-cart-totalamount shopping-cart-overflow"><p>Totalt: '+totalPrice+' kr</p></div><div class="shopping-cart-button"><button type="submit" class="btn btn-cherry">Gå vidare!</button></div></div>'
       $("#shopping-cart").html(h);
+    }});
+}
+
+function shoppingCartPage(){
+  $.ajax({
+    type: 'GET',
+    url: "/cookie_products",
+    data: {
+      data:JSON.stringify(currentCookie),
+    },
+    dataType : "json",
+    success: (response) => {
+      let h="";
+      var totalPrice = 0;
+      for (let i = 0; i < response.length; i++) {
+        if (response[i]["stock"] > 0) {
+          totalPrice += response[i]['price']*response[i]['stock']
+        h+='<div class="shopping-cart-box color-lgray shopping-cart-color shopping-cart-link"><a href="/product/'+response[i]["id"]+'"><div class="shopping-cart-overflow shopping-cart-name color-lgray"><p>'+response[i]["name"]+'</p></div></a><div class="shopping-cart-amount"><p>'+response[i]["stock"]+' st</p></div><div class="shopping-cart-price"><p>'+response[i]["price"]+' kr</p></div><div class="shopping-cart-trash" onclick=removeProduct('+response[i]["id"]+','+response[i]["stock"]+')><i class="fas fa-trash"></i></div></div>'
+        }
+      }
+      h+='<div class="shopping-cart-box color-lgray"><div class="shopping-cart-totalamount shopping-cart-overflow"><p>Totalt: '+totalPrice+' kr</p></div><div class="shopping-cart-button"><button type="submit" class="btn btn-cherry">Gå vidare!</button></div></div>'
+      $("#shopping-cart-page").html(h);
     }});
 }
