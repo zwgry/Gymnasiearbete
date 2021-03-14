@@ -5,12 +5,19 @@
 {% block head%}<link rel="stylesheet" type="text/css" href="..{{ url_for('static', filename='admin_style.css') }}">{% endblock %}
 
 {%block content%}
-    <div class="row menu_container">
+    <div class="row menu_container" >
         {% for product in products %}
             <div class="col mar5">
                 <div class="product_container color-darkernight">
+                    {% for picture in pictures %}
+                        {% if picture.product_id == product.id %}
+                        <div class='product'>
+                            <img class='center' src="/{{picture.filepath}}" alt=''>
+                        </div>
+                        {% endif %}
+                    {% endfor %}
                     <h3 class='color-text-cherry' >{{product.name}}</h3>
-                    <a href="{{ url_for('admin.admin_edit', product_id = product.id) }}" class="btn btn-cherry">Visa</a>
+                    <a href="{{ url_for('admin.admin_edit', product_id = product.id) }}" class="btn btn-cherry">Visa</a>       
                 </div>            
             </div>
         {% endfor %}

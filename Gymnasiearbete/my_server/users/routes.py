@@ -38,7 +38,7 @@ def edit_user():
         user.name = name
         user.email = email
         db.session.commit()
-        return rt('edit_user.html', user = user)
+        return rt('edit_user.html', user = user,logged_id=is_logged_in())
     user_id = request.args['id']
     user = User.query.filter_by(id=user_id).first()
     return rt('edit_user.html', user = user,logged_id=is_logged_in())

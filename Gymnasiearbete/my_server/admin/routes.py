@@ -17,7 +17,7 @@ def admin_home():
 @admin_required
 def admin_category():
     id = request.args['category_id']
-    return rt('admin_products.html', products=Product.query.filter_by(category=id).all(), logged_id=is_logged_in(), category_name=Category.query.filter_by(id=id).first().name, user=get_current_user())
+    return rt('admin_products.html', products=Product.query.filter_by(category=id).order_by(Product.id.asc()).all(), pictures = Picture.query.group_by(Picture.product_id).all() ,logged_id=is_logged_in(), category_name=Category.query.filter_by(id=id).first().name, user=get_current_user())
 
 
 @admin.route('/admin/send_email', methods=['GET','POST'])

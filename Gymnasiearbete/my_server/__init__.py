@@ -25,7 +25,7 @@ from my_server.main.routes import main
 from my_server.shop.routes import shop
 from my_server.admin.routes import admin
 from my_server.users.routes import users
-from my_server.error.routes import errors
+from my_server.errors.routes import errors
 
 app.register_blueprint(main)
 app.register_blueprint(shop)
