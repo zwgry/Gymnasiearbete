@@ -7,17 +7,6 @@ import json
 
 shop = Blueprint('shop',__name__)
 
-
-@shop.route('/categories')
-@shop.route('/categories/')
-@shop.route('/categories/<id>')
-def categories(id = 0):
-    if id == 0:
-        categories = Category.query.filter_by(id=None).all()
-    else:
-        categories = Category.query.filter_by(id=id).all()
-    return rt('categories.html', categories=categories)
-
 @shop.route('/products')
 @shop.route('/products/<category>')
 def products(category=0):

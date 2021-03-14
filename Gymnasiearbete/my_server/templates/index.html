@@ -19,7 +19,7 @@
                 <a class="next" onclick="plusSlides(1)">&#10095;</a>
             </div>
 
-            <div style="text-align:center">
+            <div class="ta-c">
                 {% for i in range(pictures|length)%}
                 <span class="dot" onclick="currentSlide({{i+1}})"></span>
                 {%endfor%}
@@ -30,7 +30,7 @@
     
     <div id="products" class="row">
         {% for product in products %}
-        <div class="col mar5"><a href="{{url_for('shop.product', id=product.id)}}" class="color-product" style="text-decoration: none;">
+        <div class="col mar5"><a href="{{url_for('shop.product', id=product.id)}}" class="color-text-cherry text-deco">
             <div class="product"><img class="center" src=/{{pictures[loop.index-1].filepath}} alt=""></div>
             <h3>{{product.name}}</h3>
         </a></div>

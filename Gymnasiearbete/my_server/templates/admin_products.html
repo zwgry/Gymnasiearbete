@@ -8,9 +8,9 @@
     <div class="row menu_container">
         {% for product in products %}
             <div class="col mar5">
-                <div class="product_container">
-                    <h3 class='color-product' >{{product.name}}</h3>
-                    <a href="{{ url_for('admin.admin_edit', product_id = product.id) }}" class="btn btn-outline-primary">Visa</a>
+                <div class="product_container color-darkernight">
+                    <h3 class='color-text-cherry' >{{product.name}}</h3>
+                    <a href="{{ url_for('admin.admin_edit', product_id = product.id) }}" class="btn btn-cherry">Visa</a>
                 </div>            
             </div>
         {% endfor %}
