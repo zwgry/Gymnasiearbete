@@ -84,12 +84,12 @@ def newsletter_registration():
     return rt('newsletter_registartion.html',logged_id=is_logged_in())
 
 @users.route("/reset_password/<token>", methods=['GET', 'POST'])
-@login_required
 def confirm_token(token):
-    current_user = User.query.filter_by(username=session['username']).first()
-    if current_user.confirmed:
-        flash('Du är redan verifierad','info')
-        return redirect(url_for('main.start'))
+    if not session.get('username') is None:
+        current_user = User.query.filter_by(username=session['username']).first()
+        if current_user.confirmed:
+            flash('Du är redan verifierad','info')
+            return redirect(url_for('main.start'))
     user = User.verify_verification_token(token)
     if user is None:
         flash('Felaktig eller gammal länk, försök igen', 'warning')

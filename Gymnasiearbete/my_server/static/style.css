@@ -275,6 +275,11 @@
     margin-bottom: 0 !important;
 }
 
+.btn-category {
+    width: 100%;
+    margin-top: 1vh;
+}
+
 #accept-cookie {
     display: none;
 }

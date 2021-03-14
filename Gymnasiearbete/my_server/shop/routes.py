@@ -28,11 +28,11 @@ def products(category=0):
     elif category == 0:
         products = Product.query.all()
         return rt('products.html',products=products)
-    return rt('products.html',products=Product.query.filter_by(category=category).all(),logged_id=is_logged_in(),category=Category.query.filter_by(id=category).first(),user=get_current_user())
+    return rt('products.html',products=Product.query.filter_by(category=category).all(),logged_id=is_logged_in(),category=Category.query.filter_by(id=category).first(),user=get_current_user(), categories = Category.query.all())
 
 @shop.route('/product/<id>')
 def product(id = 0):
-    return rt('product.html',product=Product.query.filter_by(id=id).first(),pictures=Picture.query.filter_by(product_id=id).all(),logged_id=is_logged_in(),user=get_current_user())
+    return rt('product.html',product=Product.query.filter_by(id=id).first(),pictures=Picture.query.filter_by(product_id=id).all(),logged_id=is_logged_in(),user=get_current_user(), categories = Category.query.all())
 
 #inmatning till sökfunktionen är en string -> produkten / kategorins namn
 @shop.route('/search_products_categories', methods = ['POST','GET'])
