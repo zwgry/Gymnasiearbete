@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block title %}Checkout | buystuff.se{% endblock %}
+
+{%block content%}
+    <script>
+        window.onload = function() {
+            startCookie();
+            shoppingCartPage();
+        };
+    </script>
+
+    <div class="container color-darkernight shopping-cart-page mt-mb-checkout" id="shopping-cart-page">
+    </div>
+{%endblock%}

@@ -49,6 +49,10 @@ def search(search = ''):
         session['search_data']=Product.query.filter(Product.name.like('%'+search+'%')).all()
         return redirect(url_for('shop.products'))
 
+@shop.route('/checkout')
+def checkout():
+    return rt('checkout.html', logged_id=is_logged_in(),user=get_current_user())
+
 @shop.route('/sort', methods = ['POST'])
 def sort_search(category=0,order=''):
     category = request.form['category']
