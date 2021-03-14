@@ -1,6 +1,6 @@
 from flask import redirect, url_for, session, request, Blueprint, make_response
 from flask import render_template as rt
-from my_server.shop.utils import is_logged_in, sql_to_list
+from my_server.shop.utils import is_logged_in, sql_to_list, get_current_user
 from my_server.models import Category, Product, Picture
 from my_server import db
 import json
@@ -28,11 +28,11 @@ def products(category=0):
     elif category == 0:
         products = Product.query.all()
         return rt('products.html',products=products)
-    return rt('products.html',products=Product.query.filter_by(category=category).all(),logged_id=is_logged_in(),category=Category.query.filter_by(id=category).first())
+    return rt('products.html',products=Product.query.filter_by(category=category).all(),logged_id=is_logged_in(),category=Category.query.filter_by(id=category).first(),user=get_current_user())
 
 @shop.route('/product/<id>')
 def product(id = 0):
-    return rt('product.html',product=Product.query.filter_by(id=id).first(),pictures=Picture.query.filter_by(product_id=id).all(),logged_id=is_logged_in())
+    return rt('product.html',product=Product.query.filter_by(id=id).first(),pictures=Picture.query.filter_by(product_id=id).all(),logged_id=is_logged_in(),user=get_current_user())
 
 #inmatning till sökfunktionen är en string -> produkten / kategorins namn
 @shop.route('/search_products_categories', methods = ['POST','GET'])

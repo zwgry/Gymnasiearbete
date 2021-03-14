@@ -55,8 +55,11 @@
                             </small>
                         </div>
                         {% elif logged_id == True %}
-                        <a class="dropdown-item profile-color color-white" href="{{url_for('users.edit_user')}}">Inställningar</a>
+                        <a class="dropdown-item profile-color color-white" href="{{url_for('users.edit_user',id=user.id)}}">Inställningar</a>
                         <a class="dropdown-item profile-color color-white" href="{{url_for('users.logout')}}">Logga ut!</a>
+                        {% if user.admin == True %}
+                        <a class="dropdown-item profile-color color-white" href="{{url_for('admin.admin_home')}}">Admin</a>
+                        {% endif %}
                         {% endif %}
                     </div>
                 </li>

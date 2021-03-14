@@ -1,6 +1,6 @@
 from flask import redirect, url_for, request, flash, session, Blueprint
 from flask import render_template as rt
-from my_server.users.utils import no_login, login_required,send_email, is_logged_in
+from my_server.users.utils import no_login, login_required,send_email, is_logged_in, get_current_user
 from my_server import db
 from my_server.models import User
 import datetime
@@ -23,7 +23,7 @@ def login():
                     session['logged_in'] = True
                     return redirect(url_for('main.start'))
         flash('användarnamnet eller lösenordet är felaktigt','warning')
-    return rt('login.html',logged_id=is_logged_in())
+    return rt('login.html',logged_id=is_logged_in(),user=get_current_user())
 
 @users.route('/edit_profile', methods=['GET','POST'])
 @login_required
@@ -77,7 +77,7 @@ def register():
             flash('användare skapad, vi har skickat ett bekräftelsemail till din mailadress','success')
             return redirect(url_for('users.login'))
     else:
-        return rt('sign_up.html',logged_id=is_logged_in())
+        return rt('sign_up.html',logged_id=is_logged_in(),user=get_current_user())
 
 @users.route('/newsletter/register')
 def newsletter_registration():

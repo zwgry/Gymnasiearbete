@@ -2,6 +2,7 @@ from flask import redirect, url_for, session, flash
 from functools import wraps
 from my_server import mail
 from flask_mail import Message
+from my_server.models import User
 
 def send_email(user):
     token = user.get_verification_token()
@@ -38,3 +39,10 @@ def is_logged_in():
     if 'logged_in' in session:
         return True
     return False
+
+def get_current_user():
+    if is_logged_in():
+        username = session['username']
+        user = User.query.filter_by(username=username).first()
+        return user
+    return None

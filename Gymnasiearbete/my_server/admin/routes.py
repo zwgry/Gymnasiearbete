@@ -1,6 +1,6 @@
 from flask import redirect, url_for, request, Blueprint, flash
 from flask import render_template as rt
-from my_server.admin.utils import admin_required, send_newsletter
+from my_server.admin.utils import admin_required, send_newsletter, is_logged_in, get_current_user
 from my_server.models import Product, Picture, Newsletter_Recipients, User, Category
 from werkzeug.utils import secure_filename
 import os
@@ -17,7 +17,7 @@ def admin_home():
 @admin_required
 def admin_category():
     id = request.args['category_id']
-    return rt('admin_products.html',products=Product.query.filter_by(category=id).all(), category_name=Category.query.filter_by(id=id).first().name)
+    return rt('admin_products.html', products=Product.query.filter_by(category=id).all(), logged_id=is_logged_in(), category_name=Category.query.filter_by(id=id).first().name, user=get_current_user())
 
 
 @admin.route('/admin/send_email', methods=['GET','POST'])
@@ -39,7 +39,7 @@ def send_email():
             flash('något gick fel, försök igen','warning')
             return rt('send_email.html')
         send_newsletter(subject,content,recipients)
-    return rt('send_email.html')
+    return rt('send_email.html', logged_id=is_logged_in(), user=get_current_user())
 
 @admin.route('/admin/edit', methods=['GET','POST'])
 @admin_required
@@ -64,7 +64,7 @@ def admin_edit():
     product = Product.query.filter_by(id=product_id).first()
     
     pictures = Picture.query.filter_by(product_id=product_id).all()
-    return rt('edit_product.html',product = product, pictures=pictures)
+    return rt('edit_product.html',product = product, pictures=pictures, logged_id=is_logged_in(), user=get_current_user())
 
 @admin.route('/admin/edit/upload_picture', methods=['POST'])
 def upload_picture():

@@ -16,6 +16,13 @@ def is_logged_in():
         return True
     return False
 
+def get_current_user():
+    if is_logged_in():
+        username = session['username']
+        user = User.query.filter_by(username=username).first()
+        return user
+    return None
+
 # kollar om användaren är en admin
 def admin_required(f):
     @wraps(f)
