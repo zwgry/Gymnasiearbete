@@ -8,6 +8,7 @@ class Product(db.Model):
     stock = db.Column(db.Integer, nullable=False)
     category = db.Column(db.Integer, db.ForeignKey('category.id'), nullable=False)
     price = db.Column(db.Integer, nullable=False)
+    popularity = db.Column(db.Integer, nullable=False, default=0)
     pictures = db.relationship('Picture', backref='product', lazy=True)
 
     def __repr__(self):
