@@ -65,6 +65,14 @@
     background-color: #1a1717 !important;
 }
 
+.color-darkernight-text {
+    color: #1a1717 !important;
+}
+
+.color-darkernight-text:hover {
+    color: #403D3E !important;
+}
+
 .color-lgray {
     color: #BFBFBF;
 }
@@ -384,6 +392,15 @@
 .mt-mb-checkout {
     margin-top: 4vh;
     margin-bottom: 70vh;
+}
+
+.text-overflow {
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.text-deco:hover {
+    text-decoration: none;
 }
 
 @media only screen and (max-width: 768px) {
