@@ -30,7 +30,7 @@
         <h1 class="color-white">{{product.name}}</h1>
         <p class="color-white">Det finns {{product.stock}} i lager | Pris {{product.price}} kr</p>
         <div class="input-group amount-product">
-            <input id="numberInput" type="number" class="form-control" name="amount" value="1" min="1" max="{{product.stock}}" onkeydown="return false">
+            <input id="numberInput" type="number" class="form-control" name="amount" value="1" min="1" max="{{product.stock}}">
             <div class="input-group-append">
                 <button class="btn btn-cherry" onclick="addProduct({{product.id}})"><a class="color-white"><i class="fa fa-plus-square"></i></a></button>
             </div>
