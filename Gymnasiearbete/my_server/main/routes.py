@@ -14,7 +14,7 @@ def start():
     products_id = []
     products = []
     pictures = []
-    iterations = 6
+    iterations = 10
     i = 0
     while i < iterations:
         id = randint(1,Product.query.count())
