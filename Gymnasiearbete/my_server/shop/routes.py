@@ -21,7 +21,10 @@ def products(category=0):
 
 @shop.route('/product/<id>')
 def product(id = 0):
-    return rt('product.html',product=Product.query.filter_by(id=id).first(),pictures=Picture.query.filter_by(product_id=id).all(),logged_id=is_logged_in(),user=get_current_user(), categories = Category.query.all())
+    product = Product.query.filter_by(id=id).first()
+    product.popularity = product.popularity + 1
+    db.session.commit()
+    return rt('product.html',product=product,pictures=Picture.query.filter_by(product_id=id).all(),logged_id=is_logged_in(),user=get_current_user(), categories = Category.query.all())
 
 #inmatning till sökfunktionen är en string -> produkten / kategorins namn
 @shop.route('/search_products_categories', methods = ['POST','GET'])
@@ -53,6 +56,10 @@ def sort_search(category=0,order=''):
             return json.dumps((sql_to_list(products),sql_to_list(pictures)))
         elif order == 'DSC':
             products = Product.query.filter(Product.category.like(category)).order_by(Product.price.desc()).all()
+            pictures = Picture.query.group_by(Picture.product_id).all()
+            return json.dumps((sql_to_list(products),sql_to_list(pictures)))
+        elif order == 'POP':
+            products = Product.query.filter(Product.category.like(category)).order_by(Product.popularity.desc()).all()
             pictures = Picture.query.group_by(Picture.product_id).all()
             return json.dumps((sql_to_list(products),sql_to_list(pictures)))
     return json.dumps('Fel vid sortering, kontrollera inmatning')

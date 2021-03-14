@@ -8,6 +8,7 @@ class Product(db.Model):
     stock = db.Column(db.Integer, nullable=False)
     category = db.Column(db.Integer, db.ForeignKey('category.id'), nullable=False)
     price = db.Column(db.Integer, nullable=False)
+    popularity = db.Column(db.Integer, nullable=False, default=0)
     pictures = db.relationship('Picture', backref='product', lazy=True)
 
     def __repr__(self):
@@ -63,20 +64,6 @@ class User(db.Model):
 
     def __repr__(self):
         return f"User('{self.username}', '{self.email}')"
-
-class List(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
-
-    def __repr__(self):
-        return f"User('{self.id}', '{self.user_id}')"
-
-class List_Product(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    list_id = db.Column(db.Integer, db.ForeignKey('list.id'), nullable=False)
-
-    def __repr__(self):
-        return f"User('{self.id}', '{self.list_id}')"
 
 class Newsletter_Recipients(db.Model):
     id = db.Column(db.Integer, primary_key=True)
